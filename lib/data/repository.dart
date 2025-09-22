@@ -1,0 +1,18 @@
+import 'package:pharmacy/data/data_source/main_api.dart';
+import 'package:pharmacy/domain/repository.dart';
+
+class RepositoryImpl implements Repository {
+  final MainApi _apiMain;
+
+  RepositoryImpl(this._apiMain);
+
+  @override
+  Future<PagedProductDto> getProducts(int page, String query) {
+    return _apiMain.getProducts(page, query);
+  }
+
+  @override
+  Future<HomeDto> getHome() {
+    return _apiMain.getHome();
+  }
+}
