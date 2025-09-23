@@ -41,12 +41,6 @@ class MyApp extends StatelessWidget {
               disabledBackgroundColor: Colors.blue.shade400,
               foregroundColor: Colors.white,
               disabledForegroundColor: Colors.white,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(0),
-                  bottom: Radius.circular(16),
-                ),
-              )
             ),
           ),
         ),

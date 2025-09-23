@@ -38,10 +38,18 @@ class ProductCard extends StatelessWidget {
               width: double.infinity,
               height: 44,
               child: ElevatedButton(
-                  child: Text("add_to_basket".tr),
+                  style: ElevatedButton.styleFrom(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(0),
+                          bottom: Radius.circular(16),
+                        ),
+                      )
+                  ),
                   onPressed: () {
 
-                  }),
+                  },
+                  child: Text("add_to_basket".tr)),
             )
           ]),
         ));

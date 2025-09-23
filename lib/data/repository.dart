@@ -7,8 +7,8 @@ class RepositoryImpl implements Repository {
   RepositoryImpl(this._apiMain);
 
   @override
-  Future<PagedProductDto> getProducts(int page, String query) {
-    return _apiMain.getProducts(page, query);
+  Future<PagedProductDto> getProducts(int page, String groupCode, String query) {
+    return _apiMain.getProducts(page, groupCode, query);
   }
 
   @override

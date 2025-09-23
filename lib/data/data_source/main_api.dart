@@ -31,8 +31,8 @@ class MainApi {
     }
   }
 
-  Future<PagedProductDto> getProducts(int page, String query) {
-    return _fetch<PagedProductDto>('/products?p=$page&q=$query', PagedProductDto.fromJson);
+  Future<PagedProductDto> getProducts(int page, String groupCode, String query) {
+    return _fetch<PagedProductDto>('/products?p=$page&g=$groupCode&q=$query', PagedProductDto.fromJson);
   }
   Future<HomeDto> getHome() {
     return _fetch<HomeDto>('/', HomeDto.fromJson);
@@ -44,15 +44,16 @@ class PagedProductDto {
   List<ProductDto> data;
   int size;
   int pageIndex;
+  String groupName;
 
-  PagedProductDto({required this.count, required this.data, required this.size, required this.pageIndex});
+  PagedProductDto({required this.count, required this.data, required this.size, required this.pageIndex, required this.groupName});
 
   factory PagedProductDto.fromJson(Map<String, dynamic> json) {
     var data = <ProductDto>[];
     json['data'].forEach((v) {
       data.add(ProductDto.fromJson(v));
     });
-    return PagedProductDto(count: json['count'], data: data, size: json['size'], pageIndex: json['pageIndex']);
+    return PagedProductDto(count: json['count'], data: data, size: json['size'], pageIndex: json['pageIndex'], groupName: json['groupName']);
   }
 }
 

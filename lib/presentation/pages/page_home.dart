@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(title: Text("App", style: TextStyle(color: Colors.teal.shade900, fontWeight: FontWeight.bold)), actions: [
           IconButton(
             onPressed: () {
-              Get.to(() => const ProductsPage(), preventDuplicates: false);
+              Get.to(() => const ProductsPage(groupCode: ""), preventDuplicates: false);
             },
             icon: const Icon(Icons.search),
           )
@@ -50,12 +50,14 @@ class _HomePageState extends State<HomePage> {
                     SliverToBoxAdapter(child: ErrorView(state: controller.homeState as MyErrorState)),
                   ],
                   if (controller.homeState.value != null) ...[
-                    SliverToBoxAdapter(child: _CategoriesHorizontal(list: controller.homeState.value!.categories, code: "", onClick: (code) {})),
+                    SliverToBoxAdapter(child: _CategoriesHorizontal(list: controller.homeState.value!.categories, code: "", onClick: (code) {
+                      Get.to(() => ProductsPage(groupCode: code), preventDuplicates: false);
+                    })),
                     ...controller.homeState.value!.list.expand((e) => [
                       SliverToBoxAdapter(
                         child: _Title(
                           title: e.title,
-                          onMoreClick: () {},
+                          onMoreClick: () { Get.to(() => ProductsPage(groupCode: e.code), preventDuplicates: false); },
                         ),
                       ),
                       SliverToBoxAdapter(
