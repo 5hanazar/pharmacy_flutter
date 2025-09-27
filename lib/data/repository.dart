@@ -15,4 +15,14 @@ class RepositoryImpl implements Repository {
   Future<HomeDto> getHome() {
     return _apiMain.getHome();
   }
+
+  @override
+  Future<BasketDto> getBasket() {
+    return _apiMain.getBasket();
+  }
+
+  @override
+  Future<num> postBasket(PostAdditionDto dto) {
+    return _apiMain.postBasket(dto);
+  }
 }

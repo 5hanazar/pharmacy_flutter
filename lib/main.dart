@@ -7,6 +7,7 @@ import 'package:pharmacy/data/data_source/main_api.dart';
 import 'package:pharmacy/data/repository.dart';
 import 'package:pharmacy/presentation/pages/page_basket.dart';
 import 'package:pharmacy/presentation/pages/page_home.dart';
+import 'package:pharmacy/resources/controller_basket.dart';
 import 'package:pharmacy/resources/controller_home.dart';
 import 'package:pharmacy/resources/my_translations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         initialBinding: BindingsBuilder(() {
           Get.put(RepositoryImpl(MainApi(prefs: prefs)));
           Get.put(HomeController());
+          Get.put(BasketController());
         }));
   }
 }

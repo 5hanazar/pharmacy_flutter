@@ -25,6 +25,10 @@ class MainApi {
       ),
     );
     if (response.statusCode == 200) {
+      if (response.headers["set-cookie"] != null) {
+        final cookie = (response.headers["set-cookie"]!.first).replaceAll(RegExp(r'^\[|\]$'), '');
+        await prefs.setString('pharmacy_user', cookie);
+      }
       return converter(jsonDecode(response.toString()));
     } else {
       throw Exception('${response.statusCode}');
@@ -36,6 +40,28 @@ class MainApi {
   }
   Future<HomeDto> getHome() {
     return _fetch<HomeDto>('/', HomeDto.fromJson);
+  }
+  Future<BasketDto> getBasket() {
+    return _fetch<BasketDto>('/basket', BasketDto.fromJson);
+  }
+
+  Future<num> postBasket(PostAdditionDto dto) async {
+    final response = await dio.post(
+      '$base/basket',
+      data: jsonEncode(dto),
+      options: Options(
+          headers: {
+            'Accept': "text/plain",
+            "Content-Type": "application/json",
+            'Cookie': "l=2;${prefs.getString("pharmacy_user") ?? ""}",
+          }
+      ),
+    );
+    if (response.statusCode == 200) {
+      return num.parse(response.toString());
+    } else {
+      throw Exception('${response.statusCode}');
+    }
   }
 }
 
@@ -64,6 +90,8 @@ class ProductDto {
   String description;
   String groupName;
   num price;
+  num inBasket;
+  bool isFavorite;
   List<String> images;
 
   ProductDto(
@@ -73,6 +101,8 @@ class ProductDto {
         required this.description,
         required this.groupName,
         required this.price,
+        required this.inBasket,
+        required this.isFavorite,
         required this.images});
 
   factory ProductDto.fromJson(Map<String, dynamic> json) {
@@ -83,6 +113,8 @@ class ProductDto {
         description: json['description'],
         groupName: json['groupName'],
         price: json['price'],
+        inBasket: json['inBasket'],
+        isFavorite: json['isFavorite'],
         images: List<String>.from(json['images']));
   }
 }
@@ -106,6 +138,23 @@ class CategoryDto {
         name: json['name'],
         description: json['description']);
   }
+}
+
+class PostAdditionDto {
+  int productId;
+  num addition;
+
+  PostAdditionDto(
+      {required this.productId,
+        required this.addition});
+
+  factory PostAdditionDto.fromJson(Map<String, dynamic> json) {
+    return PostAdditionDto(
+        productId: json['productId'],
+        addition: json['addition']);
+  }
+
+  Map<String, dynamic> toJson() => {'productId': productId, 'addition': addition};
 }
 
 class RowDto {
@@ -159,6 +208,29 @@ class HomeDto {
     return HomeDto(
       categories: categories,
       list: list,
+    );
+  }
+}
+
+class BasketDto {
+  final num total;
+  final List<ProductDto> products;
+
+  BasketDto({
+    required this.total,
+    required this.products,
+  });
+
+  factory BasketDto.fromJson(Map<String, dynamic> json) {
+    var products = <ProductDto>[];
+    if (json['products'] != null) {
+      json['products'].forEach((v) {
+        products.add(ProductDto.fromJson(v));
+      });
+    }
+    return BasketDto(
+      total: json['total'],
+      products: products,
     );
   }
 }
