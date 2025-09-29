@@ -70,7 +70,16 @@ class MyBottomNav extends StatelessWidget {
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.shopping_cart),
+        icon: GetBuilder<BasketController>(builder: (controller) {
+          return Badge(
+            label: Text(
+              (controller.basketState.value?.total ?? 0).toString(),
+              style: const TextStyle(color: Colors.white, fontSize: 10),
+            ),
+            isLabelVisible: (controller.basketState.value?.total ?? 0) > 0,
+            child: const Icon(Icons.shopping_basket),
+          );
+        }),
         title: ("basket".tr),
         activeColorPrimary: Colors.blue.shade400,
         inactiveColorPrimary: CupertinoColors.systemGrey,
@@ -90,6 +99,7 @@ class MyBottomNav extends StatelessWidget {
       controller: controller,
       screens: _buildScreens(),
       items: _navBarsItems(),
+      navBarStyle: NavBarStyle.style9,
       animationSettings: const NavBarAnimationSettings(screenTransitionAnimation: ScreenTransitionAnimationSettings(animateTabTransition: true, screenTransitionAnimationType: ScreenTransitionAnimationType.slide)),
     );
   }

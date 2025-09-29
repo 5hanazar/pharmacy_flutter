@@ -51,6 +51,7 @@ class _ProductCardState extends State<ProductCard> {
                     height: 44,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
+                            textStyle: const TextStyle(fontSize: 24),
                             padding: EdgeInsets.zero,
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
@@ -62,7 +63,7 @@ class _ProductCardState extends State<ProductCard> {
                         onPressed: () {
                           controller.postBasket(PostAdditionDto(productId: widget.product.id, addition: -1));
                         },
-                        child: const Text("-")),
+                        child: const Text("−")),
                   ),
                   Expanded(child: Text(v.toString(), style: const TextStyle(fontSize: 18), textAlign: TextAlign.center)),
                   SizedBox(
@@ -70,6 +71,7 @@ class _ProductCardState extends State<ProductCard> {
                     height: 44,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
+                            textStyle: const TextStyle(fontSize: 24),
                             padding: EdgeInsets.zero,
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(

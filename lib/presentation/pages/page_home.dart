@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("App", style: TextStyle(color: Colors.teal.shade900, fontWeight: FontWeight.bold)), actions: [
+        appBar: AppBar(title: Text("Şypa", style: TextStyle(color: Colors.blue.shade900, fontWeight: FontWeight.bold)), actions: [
           IconButton(
             onPressed: () {
               Get.to(() => const ProductsPage(groupCode: ""), preventDuplicates: false);
