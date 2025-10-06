@@ -25,4 +25,9 @@ class RepositoryImpl implements Repository {
   Future<num> postBasket(PostAdditionDto dto) {
     return _apiMain.postBasket(dto);
   }
+
+  @override
+  Future<void> postCheckout(PostOrderRequestDto dto) {
+    return _apiMain.postCheckout(dto);
+  }
 }

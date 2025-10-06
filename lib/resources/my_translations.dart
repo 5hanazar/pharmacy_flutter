@@ -10,6 +10,9 @@ class MyTranslations extends Translations {
       'home': 'Главная',
       'refresh': 'Обновить',
       'add_to_basket': 'Добавить',
+      'checkout': 'Оформить',
+      'send_order_request': 'Отправить запрос',
+      'confirm': 'Подтвердить',
     },
     'tk_TM': {
       'products': 'Harytlar',
@@ -18,6 +21,9 @@ class MyTranslations extends Translations {
       'home': 'Baş sahypa',
       'refresh': 'Täzele',
       'add_to_basket': 'Sebete goş',
+      'checkout': 'Sargyt et',
+      'send_order_request': 'Отправить запрос',
+      'confirm': 'Подтвердить',
     }
   };
 }

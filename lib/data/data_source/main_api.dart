@@ -63,6 +63,25 @@ class MainApi {
       throw Exception('${response.statusCode}');
     }
   }
+
+  Future<void> postCheckout(PostOrderRequestDto dto) async {
+    final response = await dio.post(
+      '$base/checkout',
+      data: FormData.fromMap({
+        'data': jsonEncode(dto),
+      }),
+      options: Options(
+          headers: {
+            'Accept': "application/json",
+            "Content-Type": "multipart/form-data",
+            'Cookie': "l=2;${prefs.getString("pharmacy_user") ?? ""}",
+          }
+      ),
+    );
+    if (response.statusCode != 200) {
+      throw Exception('${response.statusCode}');
+    }
+  }
 }
 
 class PagedProductDto {
@@ -233,4 +252,27 @@ class BasketDto {
       products: products,
     );
   }
+}
+
+class PostOrderRequestDto {
+  String clientName;
+  String phoneToContact;
+  String address;
+  String description;
+
+  PostOrderRequestDto(
+      {required this.clientName,
+        required this.phoneToContact,
+        required this.address,
+        required this.description});
+
+  factory PostOrderRequestDto.fromJson(Map<String, dynamic> json) {
+    return PostOrderRequestDto(
+        clientName: json['clientName'],
+        phoneToContact: json['phoneToContact'],
+        address: json['address'],
+        description: json['description']);
+  }
+
+  Map<String, dynamic> toJson() => {'clientName': clientName, 'phoneToContact': phoneToContact, 'address': address, 'description': description};
 }

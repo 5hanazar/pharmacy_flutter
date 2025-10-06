@@ -31,4 +31,8 @@ class BasketController extends GetxController {
     await _repo.postBasket(dto);
     refreshBasket();
   }
+
+  Future<void> postCheckout(PostOrderRequestDto dto) {
+    return _repo.postCheckout(dto);
+  }
 }

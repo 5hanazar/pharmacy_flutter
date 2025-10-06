@@ -50,6 +50,7 @@ class _HomePageState extends State<HomePage> {
                     SliverToBoxAdapter(child: ErrorView(state: controller.homeState as MyErrorState)),
                   ],
                   if (controller.homeState.value != null) ...[
+                    const SliverToBoxAdapter(child: _Caution()),
                     SliverToBoxAdapter(child: _CategoriesHorizontal(list: controller.homeState.value!.categories, code: "", onClick: (code) {
                       Get.to(() => ProductsPage(groupCode: code), preventDuplicates: false);
                     })),
@@ -70,6 +71,28 @@ class _HomePageState extends State<HomePage> {
                 ],
               );
             })));
+  }
+}
+
+class _Caution extends StatelessWidget {
+  const _Caution();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        margin: const EdgeInsets.only(top: 16, bottom: 16, left: 16, right: 16),
+        decoration: BoxDecoration(
+          color: Colors.blue.shade50,
+          border: Border.all(
+            color: Colors.blue,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: const Padding(
+          padding: EdgeInsets.all(16),
+          child: Text("Указанные цены товаров являются приблизительными.\nНастоящую стоимость сообщат аптеки после принятия вашего запроса.", style: TextStyle(color: Colors.blue)),
+        ));
   }
 }
 
@@ -94,7 +117,7 @@ class _CategoriesHorizontal extends StatelessWidget {
               },
               child: Card(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(16),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),

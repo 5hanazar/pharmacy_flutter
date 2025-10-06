@@ -5,4 +5,5 @@ abstract class Repository {
   Future<HomeDto> getHome();
   Future<BasketDto> getBasket();
   Future<num> postBasket(PostAdditionDto dto);
+  Future<void> postCheckout(PostOrderRequestDto dto);
 }
