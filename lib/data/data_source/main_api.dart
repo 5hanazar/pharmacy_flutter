@@ -85,6 +85,21 @@ class MainApi {
       throw Exception('${response.statusCode}');
     }
   }
+
+  Future<void> deleteOrderRequest(int id) async {
+    final response = await dio.delete(
+      '$base/orders/$id',
+      options: Options(
+          headers: {
+            'Accept': "application/json",
+            'Cookie': "l=2;${prefs.getString("pharmacy_user") ?? ""}",
+          }
+      ),
+    );
+    if (response.statusCode != 200) {
+      throw Exception('${response.statusCode}');
+    }
+  }
 }
 
 class PagedProductDto {
@@ -324,6 +339,7 @@ class OrderRequestLineDtoView {
 }
 
 class OrderRequestDtoView {
+  final int id;
   final String phone;
   final String address;
   final String description;
@@ -332,6 +348,7 @@ class OrderRequestDtoView {
   final String createdDate;
 
   OrderRequestDtoView({
+    required this.id,
     required this.phone,
     required this.address,
     required this.description,
@@ -349,6 +366,7 @@ class OrderRequestDtoView {
     }
 
     return OrderRequestDtoView(
+      id: json['id'],
       phone: json['phone'],
       address: json['address'],
       description: json['description'],

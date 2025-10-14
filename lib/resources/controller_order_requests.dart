@@ -7,12 +7,6 @@ class OrderRequestsController extends GetxController {
   final RepositoryImpl _repo = Get.find();
   MyState<PagedOrderRequestDto> orderRequestsState = MyState.loading(null);
 
-  @override
-  void onInit() {
-    super.onInit();
-    refreshOrderRequests();
-  }
-
   Future<void> refreshOrderRequests() async {
     orderRequestsState = MyState.loading(orderRequestsState.value);
     update();
@@ -24,5 +18,10 @@ class OrderRequestsController extends GetxController {
       orderRequestsState = MyState.error(orderRequestsState.value, error.toString());
       update();
     }
+  }
+
+  Future<void> deleteOrderRequest(int id) async {
+    await _repo.deleteOrderRequest(id);
+    refreshOrderRequests();
   }
 }

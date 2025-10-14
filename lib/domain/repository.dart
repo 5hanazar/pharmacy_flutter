@@ -7,4 +7,5 @@ abstract class Repository {
   Future<PagedOrderRequestDto> getOrderRequests();
   Future<num> postBasket(PostAdditionDto dto);
   Future<void> postCheckout(PostOrderRequestDto dto);
+  Future<void> deleteOrderRequest(int id);
 }

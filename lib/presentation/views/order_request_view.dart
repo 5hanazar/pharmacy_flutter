@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pharmacy/data/data_source/main_api.dart';
+import 'package:pharmacy/resources/controller_order_requests.dart';
 
 class OrderRequestView extends StatelessWidget {
+  final OrderRequestsController _controller = Get.find();
   final OrderRequestDtoView order;
 
-  const OrderRequestView({super.key, required this.order});
+  OrderRequestView({super.key, required this.order});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +54,9 @@ class OrderRequestView extends StatelessWidget {
           ],
         ),
       ),
-      Align(alignment: Alignment.topRight, child: IconButton(onPressed: () {}, icon: Icon(Icons.close, color: Colors.grey.shade400)))
+      Align(alignment: Alignment.topRight, child: IconButton(onPressed: () {
+        _controller.deleteOrderRequest(order.id);
+      }, icon: Icon(Icons.close, color: Colors.grey.shade400)))
     ]));
   }
 }

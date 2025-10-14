@@ -19,6 +19,7 @@ class _OrderRequestsPageState extends State<OrderRequestsPage> {
   @override
   void initState() {
     super.initState();
+    refreshList();
   }
 
   Future<void> refreshList() async {

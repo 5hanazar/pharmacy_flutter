@@ -35,4 +35,9 @@ class RepositoryImpl implements Repository {
   Future<void> postCheckout(PostOrderRequestDto dto) {
     return _apiMain.postCheckout(dto);
   }
+
+  @override
+  Future<void> deleteOrderRequest(int id) {
+    return _apiMain.deleteOrderRequest(id);
+  }
 }
