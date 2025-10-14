@@ -1,10 +1,12 @@
 import 'package:pharmacy/data/data_source/main_api.dart';
 import 'package:pharmacy/domain/repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RepositoryImpl implements Repository {
+  final SharedPreferences _prefs;
   final MainApi _apiMain;
 
-  RepositoryImpl(this._apiMain);
+  RepositoryImpl(this._prefs, this._apiMain);
 
   @override
   Future<PagedProductDto> getProducts(int page, String groupCode, String query) {
@@ -39,5 +41,10 @@ class RepositoryImpl implements Repository {
   @override
   Future<void> deleteOrderRequest(int id) {
     return _apiMain.deleteOrderRequest(id);
+  }
+
+  @override
+  Future<void> setLanguage(int lang) {
+    return _prefs.setInt("lang", lang);
   }
 }

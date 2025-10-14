@@ -60,14 +60,15 @@ class OrderRequestView extends StatelessWidget {
           builder: (BuildContext context) => AlertDialog(
             title: Text("${'cancel_order'.tr}?"),
             actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                style: TextButton.styleFrom(foregroundColor: Colors.grey),
+                child: Text('no'.tr),
+              ),
               TextButton(onPressed: () async {
                 await _controller.deleteOrderRequest(order.id);
                 if (context.mounted) Navigator.pop(context);
               }, child: Text('yes'.tr)),
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text('no'.tr),
-              ),
             ],
           ),
         );

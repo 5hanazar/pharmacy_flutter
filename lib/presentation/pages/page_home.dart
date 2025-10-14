@@ -4,6 +4,7 @@ import 'package:pharmacy/data/data_source/main_api.dart';
 import 'package:pharmacy/domain/data_state.dart';
 import 'package:pharmacy/presentation/pages/page_products.dart';
 import 'package:pharmacy/presentation/views/card_product.dart';
+import 'package:pharmacy/presentation/views/dialog_language.dart';
 import 'package:pharmacy/presentation/views/view_error.dart';
 import 'package:pharmacy/resources/controller_home.dart';
 
@@ -28,10 +29,32 @@ class _HomePageState extends State<HomePage> {
     await controller.refreshHome();
   }
 
+  void _showLanguageDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return LanguageDialog(
+          onConfirm: (value) async {
+            await Get.updateLocale(value);
+            await controller.setLanguage(value.languageCode == "ru" ? 1 : 2);
+            refreshList();
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text("Şypa", style: TextStyle(color: Colors.blue.shade900, fontWeight: FontWeight.bold)), actions: [
+          IconButton(
+            onPressed: () {
+              _showLanguageDialog(context);
+            },
+            icon: const Icon(Icons.translate),
+          ),
           IconButton(
             onPressed: () {
               Get.to(() => const ProductsPage(groupCode: ""), preventDuplicates: false);

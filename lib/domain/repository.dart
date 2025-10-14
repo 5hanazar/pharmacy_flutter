@@ -8,4 +8,5 @@ abstract class Repository {
   Future<num> postBasket(PostAdditionDto dto);
   Future<void> postCheckout(PostOrderRequestDto dto);
   Future<void> deleteOrderRequest(int id);
+  Future<void> setLanguage(int lang);
 }

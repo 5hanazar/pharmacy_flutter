@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
         translations: MyTranslations(),
-        locale: prefs.getString("l") == "2" ? const Locale('tk', 'TM') : const Locale('ru', 'RU'),
+        locale: prefs.getString("l") == "1" ? const Locale('ru', 'RU') : const Locale('tm', 'TM'),
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           useMaterial3: true,
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
         ),
         home: const MyBottomNav(),
         initialBinding: BindingsBuilder(() {
-          Get.put(RepositoryImpl(MainApi(prefs: prefs)));
+          Get.put(RepositoryImpl(prefs, MainApi(prefs: prefs)));
           Get.put(HomeController());
           Get.put(BasketController());
           Get.put(OrderRequestsController());

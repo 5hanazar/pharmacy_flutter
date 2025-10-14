@@ -15,11 +15,13 @@ class MyTranslations extends Translations {
       'confirm': 'Подтвердить',
       'orders': 'Запросы на заказ',
       'not_found': 'Не найдено',
-      'cancel_order': 'Отменить запрос',
+      'cancel_order': 'Отменить запрос?',
+      'choose_language': 'Выберите язык',
+      'cancel': 'Отменить',
       'yes': 'Да',
       'no': 'Нет',
     },
-    'tk_TM': {
+    'tm_TM': {
       'products': 'Harytlar',
       'basket': 'Sebet',
       'search': 'Gözle',
@@ -27,13 +29,15 @@ class MyTranslations extends Translations {
       'refresh': 'Täzele',
       'add_to_basket': 'Sebete goş',
       'checkout': 'Sargyt et',
-      'send_order_request': 'Отправить запрос',
-      'confirm': 'Подтвердить',
-      'orders': 'Запросы на заказ',
-      'not_found': 'Не найдено',
-      'cancel_order': 'Отменить запрос',
-      'yes': 'Да',
-      'no': 'Нет',
+      'send_order_request': 'Talap ugrat',
+      'confirm': 'Tassykla',
+      'orders': 'Talaplarym',
+      'not_found': 'Hiç zat ýok',
+      'cancel_order': 'Talaby ýatyrmalymy?',
+      'choose_language': 'Dil saýla',
+      'cancel': 'Yza dolan',
+      'yes': 'Hawa',
+      'no': 'Ýok',
     }
   };
 }

@@ -20,7 +20,7 @@ class MainApi {
       options: Options(
         headers: {
           'Accept': "application/json",
-          'Cookie': "l=2;${prefs.getString("pharmacy_user") ?? ""}",
+          'Cookie': "l=${prefs.getInt("lang") ?? 1};${prefs.getString("pharmacy_user") ?? ""}",
         },
       ),
     );
@@ -56,7 +56,7 @@ class MainApi {
           headers: {
             'Accept': "text/plain",
             "Content-Type": "application/json",
-            'Cookie': "l=2;${prefs.getString("pharmacy_user") ?? ""}",
+            'Cookie': "l=${prefs.getInt("lang") ?? 1};${prefs.getString("pharmacy_user") ?? ""}",
           }
       ),
     );
@@ -77,7 +77,7 @@ class MainApi {
           headers: {
             'Accept': "application/json",
             "Content-Type": "multipart/form-data",
-            'Cookie': "l=2;${prefs.getString("pharmacy_user") ?? ""}",
+            'Cookie': "l=${prefs.getInt("lang") ?? 1};${prefs.getString("pharmacy_user") ?? ""}",
           }
       ),
     );
@@ -92,7 +92,7 @@ class MainApi {
       options: Options(
           headers: {
             'Accept': "application/json",
-            'Cookie': "l=2;${prefs.getString("pharmacy_user") ?? ""}",
+            'Cookie': "l=${prefs.getInt("lang") ?? 1};${prefs.getString("pharmacy_user") ?? ""}",
           }
       ),
     );

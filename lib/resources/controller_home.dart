@@ -25,4 +25,8 @@ class HomeController extends GetxController {
       update();
     }
   }
+
+  Future<void> setLanguage(int lang) {
+    return _repo.setLanguage(lang);
+  }
 }
