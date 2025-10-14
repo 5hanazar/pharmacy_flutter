@@ -22,6 +22,11 @@ class RepositoryImpl implements Repository {
   }
 
   @override
+  Future<PagedOrderRequestDto> getOrderRequests() {
+    return _apiMain.getOrderRequests();
+  }
+
+  @override
   Future<num> postBasket(PostAdditionDto dto) {
     return _apiMain.postBasket(dto);
   }

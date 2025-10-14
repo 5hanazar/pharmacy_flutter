@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy/domain/data_state.dart';
 import 'package:pharmacy/presentation/pages/page_checkout.dart';
+import 'package:pharmacy/presentation/pages/page_order_requests.dart';
 import 'package:pharmacy/presentation/views/error_view.dart';
 import 'package:pharmacy/presentation/views/row_product.dart';
 import 'package:pharmacy/resources/controller_basket.dart';
@@ -32,6 +33,12 @@ class _BasketPageState extends State<BasketPage> {
         appBar: AppBar(title: Text("basket".tr, style: const TextStyle(fontWeight: FontWeight.bold)), actions: [
           IconButton(
             onPressed: () {
+              Get.to(() => const OrderRequestsPage(), preventDuplicates: false);
+            },
+            icon: const Icon(Icons.receipt_outlined),
+          ),
+          IconButton(
+            onPressed: () {
               Get.to(() => const CheckoutPage(), preventDuplicates: false);
             },
             icon: const Icon(Icons.check),
@@ -54,7 +61,7 @@ class _BasketPageState extends State<BasketPage> {
                         return ProductRow(product: controller.basketState.value!.products[i]);
                       },
                       separatorBuilder: (context, i) {
-                        return const SizedBox(height: 10.0);
+                        return const SizedBox(height: 8);
                       },
                     )
                   ],

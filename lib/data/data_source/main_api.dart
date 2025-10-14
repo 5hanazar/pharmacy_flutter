@@ -44,6 +44,9 @@ class MainApi {
   Future<BasketDto> getBasket() {
     return _fetch<BasketDto>('/basket', BasketDto.fromJson);
   }
+  Future<PagedOrderRequestDto> getOrderRequests() {
+    return _fetch<PagedOrderRequestDto>('/orders', PagedOrderRequestDto.fromJson);
+  }
 
   Future<num> postBasket(PostAdditionDto dto) async {
     final response = await dio.post(
@@ -85,11 +88,11 @@ class MainApi {
 }
 
 class PagedProductDto {
-  int count;
-  List<ProductDto> data;
-  int size;
-  int pageIndex;
-  String groupName;
+  final int count;
+  final List<ProductDto> data;
+  final int size;
+  final int pageIndex;
+  final String groupName;
 
   PagedProductDto({required this.count, required this.data, required this.size, required this.pageIndex, required this.groupName});
 
@@ -103,15 +106,15 @@ class PagedProductDto {
 }
 
 class ProductDto {
-  int id;
-  String barcode;
-  String name;
-  String description;
-  String groupName;
-  num price;
-  num inBasket;
-  bool isFavorite;
-  List<String> images;
+  final int id;
+  final String barcode;
+  final String name;
+  final String description;
+  final String groupName;
+  final num price;
+  final num inBasket;
+  final bool isFavorite;
+  final List<String> images;
 
   ProductDto(
       {required this.id,
@@ -139,10 +142,10 @@ class ProductDto {
 }
 
 class CategoryDto {
-  int id;
-  String code;
-  String name;
-  String description;
+  final int id;
+  final String code;
+  final String name;
+  final String description;
 
   CategoryDto(
       {required this.id,
@@ -160,8 +163,8 @@ class CategoryDto {
 }
 
 class PostAdditionDto {
-  int productId;
-  num addition;
+  final int productId;
+  final num addition;
 
   PostAdditionDto(
       {required this.productId,
@@ -254,11 +257,28 @@ class BasketDto {
   }
 }
 
+class PagedOrderRequestDto {
+  final int count;
+  final List<OrderRequestDtoView> data;
+  final int size;
+  final int pageIndex;
+
+  PagedOrderRequestDto({required this.count, required this.data, required this.size, required this.pageIndex});
+
+  factory PagedOrderRequestDto.fromJson(Map<String, dynamic> json) {
+    var data = <OrderRequestDtoView>[];
+    json['data'].forEach((v) {
+      data.add(OrderRequestDtoView.fromJson(v));
+    });
+    return PagedOrderRequestDto(count: json['count'], data: data, size: json['size'], pageIndex: json['pageIndex']);
+  }
+}
+
 class PostOrderRequestDto {
-  String clientName;
-  String phoneToContact;
-  String address;
-  String description;
+  final String clientName;
+  final String phoneToContact;
+  final String address;
+  final String description;
 
   PostOrderRequestDto(
       {required this.clientName,
@@ -275,4 +295,66 @@ class PostOrderRequestDto {
   }
 
   Map<String, dynamic> toJson() => {'clientName': clientName, 'phoneToContact': phoneToContact, 'address': address, 'description': description};
+}
+
+class OrderRequestLineDtoView {
+  final String barcode;
+  final String name;
+  final String description;
+  final num price;
+  final num quantity;
+
+  OrderRequestLineDtoView({
+    required this.barcode,
+    required this.name,
+    required this.description,
+    required this.price,
+    required this.quantity,
+  });
+
+  factory OrderRequestLineDtoView.fromJson(Map<String, dynamic> json) {
+    return OrderRequestLineDtoView(
+      barcode: json['barcode'],
+      name: json['name'],
+      description: json['description'],
+      price: json['price'],
+      quantity: json['quantity'],
+    );
+  }
+}
+
+class OrderRequestDtoView {
+  final String phone;
+  final String address;
+  final String description;
+  final List<OrderRequestLineDtoView> lines;
+  final num total;
+  final String createdDate;
+
+  OrderRequestDtoView({
+    required this.phone,
+    required this.address,
+    required this.description,
+    required this.lines,
+    required this.total,
+    required this.createdDate,
+  });
+
+  factory OrderRequestDtoView.fromJson(Map<String, dynamic> json) {
+    var lines = <OrderRequestLineDtoView>[];
+    if (json['lines'] != null) {
+      json['lines'].forEach((v) {
+        lines.add(OrderRequestLineDtoView.fromJson(v));
+      });
+    }
+
+    return OrderRequestDtoView(
+      phone: json['phone'],
+      address: json['address'],
+      description: json['description'],
+      lines: lines,
+      total: json['total'],
+      createdDate: json['createdDate'],
+    );
+  }
 }

@@ -13,6 +13,8 @@ class MyTranslations extends Translations {
       'checkout': 'Оформить',
       'send_order_request': 'Отправить запрос',
       'confirm': 'Подтвердить',
+      'orders': 'Запросы на заказ',
+      'not_found': 'Не найдено',
     },
     'tk_TM': {
       'products': 'Harytlar',
@@ -24,6 +26,8 @@ class MyTranslations extends Translations {
       'checkout': 'Sargyt et',
       'send_order_request': 'Отправить запрос',
       'confirm': 'Подтвердить',
+      'orders': 'Запросы на заказ',
+      'not_found': 'Не найдено',
     }
   };
 }

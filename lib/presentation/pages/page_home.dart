@@ -117,7 +117,7 @@ class _CategoriesHorizontal extends StatelessWidget {
               },
               child: Card(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),

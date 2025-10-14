@@ -54,6 +54,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   TextFormField(
                     initialValue: "~${controller.basketState.value?.total ?? 0}",
                     readOnly: true,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Примерная сумма',
@@ -99,7 +100,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     child: TextFormField(
                       controller: _description,
                       readOnly: _isLoading,
-                      maxLines: 5,
+                      maxLines: 4,
                       decoration: const InputDecoration(border: OutlineInputBorder(), labelText: 'Описание'),
                     ),
                   ),

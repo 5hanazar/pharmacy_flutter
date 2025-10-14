@@ -97,7 +97,7 @@ class _ProductsPageState extends State<ProductsPage> {
             showNoMoreItemsIndicatorAsGridChild: false,
             pagingController: _pagingController,
             builderDelegate: PagedChildBuilderDelegate<ProductDto>(
-              noItemsFoundIndicatorBuilder: (_) => Center(child: Text(_searchTerm == "" ? "Type to search" : "Not found", style: const TextStyle(fontSize: 16))),
+              noItemsFoundIndicatorBuilder: (_) => Center(child: Text(_searchTerm == "" ? "Type to search" : "not_found".tr, style: const TextStyle(fontSize: 16))),
               firstPageErrorIndicatorBuilder: (_) => Status(msg: _pagingController.error.toString(), onRefresh: () => _pagingController.refresh()),
               newPageErrorIndicatorBuilder: (_) => Status(msg: _pagingController.error.toString(), onRefresh: () => _pagingController.retryLastFailedRequest()),
               newPageProgressIndicatorBuilder: (_) => Container(alignment: Alignment.center, height: 100, child: const CircularProgressIndicator()),
