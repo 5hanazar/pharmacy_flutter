@@ -55,7 +55,22 @@ class OrderRequestView extends StatelessWidget {
         ),
       ),
       Align(alignment: Alignment.topRight, child: IconButton(onPressed: () {
-        _controller.deleteOrderRequest(order.id);
+        showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: Text("${'cancel_order'.tr}?"),
+            actions: <Widget>[
+              TextButton(onPressed: () async {
+                await _controller.deleteOrderRequest(order.id);
+                if (context.mounted) Navigator.pop(context);
+              }, child: Text('yes'.tr)),
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('no'.tr),
+              ),
+            ],
+          ),
+        );
       }, icon: Icon(Icons.close, color: Colors.grey.shade400)))
     ]));
   }

@@ -15,6 +15,9 @@ class MyTranslations extends Translations {
       'confirm': 'Подтвердить',
       'orders': 'Запросы на заказ',
       'not_found': 'Не найдено',
+      'cancel_order': 'Отменить запрос',
+      'yes': 'Да',
+      'no': 'Нет',
     },
     'tk_TM': {
       'products': 'Harytlar',
@@ -28,6 +31,9 @@ class MyTranslations extends Translations {
       'confirm': 'Подтвердить',
       'orders': 'Запросы на заказ',
       'not_found': 'Не найдено',
+      'cancel_order': 'Отменить запрос',
+      'yes': 'Да',
+      'no': 'Нет',
     }
   };
 }

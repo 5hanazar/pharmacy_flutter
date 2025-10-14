@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:pharmacy/domain/data_state.dart';
 import 'package:pharmacy/presentation/pages/page_checkout.dart';
 import 'package:pharmacy/presentation/pages/page_order_requests.dart';
-import 'package:pharmacy/presentation/views/error_view.dart';
+import 'package:pharmacy/presentation/views/view_error.dart';
 import 'package:pharmacy/presentation/views/row_product.dart';
 import 'package:pharmacy/resources/controller_basket.dart';
 

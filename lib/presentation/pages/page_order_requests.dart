@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy/domain/data_state.dart';
-import 'package:pharmacy/presentation/views/error_view.dart';
-import 'package:pharmacy/presentation/views/order_request_view.dart';
+import 'package:pharmacy/presentation/views/view_error.dart';
+import 'package:pharmacy/presentation/views/view_order_request.dart';
 import 'package:pharmacy/resources/controller_order_requests.dart';
 
 class OrderRequestsPage extends StatefulWidget {

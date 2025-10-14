@@ -4,7 +4,7 @@ import 'package:pharmacy/data/data_source/main_api.dart';
 import 'package:pharmacy/domain/data_state.dart';
 import 'package:pharmacy/presentation/pages/page_products.dart';
 import 'package:pharmacy/presentation/views/card_product.dart';
-import 'package:pharmacy/presentation/views/error_view.dart';
+import 'package:pharmacy/presentation/views/view_error.dart';
 import 'package:pharmacy/resources/controller_home.dart';
 
 class HomePage extends StatefulWidget {
