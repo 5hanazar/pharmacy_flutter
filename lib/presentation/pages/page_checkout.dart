@@ -47,17 +47,17 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         ),
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Text("После подтверждения ваш запрос будет отправлен во все аптеки.\nВы можете отменить его в любое время.", style: TextStyle(color: Colors.blue)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text("text2".tr, style: const TextStyle(color: Colors.blue)),
                       )),
                   TextFormField(
                     initialValue: "~${controller.basketState.value?.total ?? 0}",
                     readOnly: true,
                     style: const TextStyle(fontWeight: FontWeight.bold),
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Примерная сумма',
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      labelText: 'approximate_total'.tr,
                       suffixText: "TMT",
                     ),
                   ),
@@ -71,14 +71,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         FilteringTextInputFormatter.digitsOnly,
                         LengthLimitingTextInputFormatter(8),
                       ],
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Телефон',
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        labelText: 'phone'.tr,
                         prefixText: "+993 ",
                       ),
                       validator: (String? value) {
                         if (value == null || value.isEmpty || value.length != 8 || !RegExp(r'^\d{8}$').hasMatch(value)) {
-                          return 'Заполните';
+                          return 'fill_up'.tr;
                         }
                         return null;
                       },
@@ -87,10 +87,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   TextFormField(
                     controller: _address,
                     readOnly: _isLoading,
-                    decoration: const InputDecoration(border: OutlineInputBorder(), labelText: 'Адрес'),
+                    decoration: InputDecoration(border: const OutlineInputBorder(), labelText: 'address'.tr),
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
-                        return 'Заполните';
+                        return 'fill_up'.tr;
                       }
                       return null;
                     },
@@ -101,7 +101,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       controller: _description,
                       readOnly: _isLoading,
                       maxLines: 4,
-                      decoration: const InputDecoration(border: OutlineInputBorder(), labelText: 'Описание'),
+                      decoration: InputDecoration(border: const OutlineInputBorder(), labelText: 'description'.tr),
                     ),
                   ),
                   Align(

@@ -50,7 +50,7 @@ class OrderRequestView extends StatelessWidget {
                     }).toList()),
               ),
             ),
-            Row(children: [Expanded(child: Text(order.createdDate, style: const TextStyle(color: Colors.blueGrey))), Text(order.total.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)), const Text("  TMT")]),
+            Row(children: [Expanded(child: Text(order.createdDate, style: const TextStyle(color: Colors.blueGrey, fontSize: 12))), Text(order.total.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)), const Text("  TMT")]),
           ],
         ),
       ),
@@ -58,7 +58,7 @@ class OrderRequestView extends StatelessWidget {
         showDialog<String>(
           context: context,
           builder: (BuildContext context) => AlertDialog(
-            title: Text("${'cancel_order'.tr}?"),
+            title: Text('cancel_order'.tr),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.pop(context),

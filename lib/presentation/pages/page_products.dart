@@ -32,6 +32,17 @@ class _ProductsPageState extends State<ProductsPage> {
   final PagingController<int, ProductDto> _pagingController = PagingController(firstPageKey: 0);
 
   Future<void> _fetchPage(int pageKey) async {
+    if (widget.groupCode == "" && _searchTerm.isEmpty) {
+      _pagingController.appendLastPage([]);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          setState(() {
+            _title = "all_products".tr;
+          });
+        }
+      });
+      return;
+    }
     try {
       final result = await repo.getProducts(pageKey + 1, widget.groupCode, _searchTerm);
       setState(() {

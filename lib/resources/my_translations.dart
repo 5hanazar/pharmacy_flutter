@@ -20,6 +20,14 @@ class MyTranslations extends Translations {
       'cancel': 'Отменить',
       'yes': 'Да',
       'no': 'Нет',
+      'all_products': 'Все продукты',
+      'approximate_total': 'Примерная сумма',
+      'phone': 'Телефон',
+      'address': 'Адрес',
+      'description': 'Описание',
+      'fill_up': 'Заполните',
+      'text1': 'Указанные цены товаров являются приблизительными.\nНастоящую стоимость сообщат аптеки после принятия вашего запроса.',
+      'text2': 'После подтверждения ваш запрос будет отправлен во все аптеки.\nВы можете отменить его в любое время.',
     },
     'tm_TM': {
       'products': 'Harytlar',
@@ -38,6 +46,14 @@ class MyTranslations extends Translations {
       'cancel': 'Yza dolan',
       'yes': 'Hawa',
       'no': 'Ýok',
+      'all_products': 'Ähli dermanlar',
+      'approximate_total': 'Takmynan jemi ',
+      'phone': 'Telefon',
+      'address': 'Salgy',
+      'description': 'Bellik',
+      'fill_up': 'Dolduryň',
+      'text1': 'Harytlaryň ýakynlaşan bahalary görkezilendir.\nHakyky bahany dermanhanalar siziň talabyňyzy kabul edenden soň habar bererler.',
+      'text2': '"Tassykla" basanyňyzdan soň, siziň islegiňiz ähli dermanhanalara iberiler.\nSiz ony islendik wagt ýatyryp bilersiňiz.',
     }
   };
 }

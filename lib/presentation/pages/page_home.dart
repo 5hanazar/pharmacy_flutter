@@ -112,9 +112,9 @@ class _Caution extends StatelessWidget {
           ),
           borderRadius: BorderRadius.circular(16),
         ),
-        child: const Padding(
-          padding: EdgeInsets.all(16),
-          child: Text("Указанные цены товаров являются приблизительными.\nНастоящую стоимость сообщат аптеки после принятия вашего запроса.", style: TextStyle(color: Colors.blue)),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Text("text1".tr, style: const TextStyle(color: Colors.blue)),
         ));
   }
 }
