@@ -73,7 +73,7 @@ class _ProductsPageState extends State<ProductsPage> {
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
-          title: const Text('Сортировка'),
+          title: Text('sorting'.tr),
           children: <Widget>[
             SimpleDialogOption(
               onPressed: () { Navigator.pop(context, ['', '']); },

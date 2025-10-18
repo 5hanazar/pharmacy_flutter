@@ -154,8 +154,8 @@ class _CategoriesHorizontal extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Align(child: Text(list[index].name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Align(child: Text(list[index].name, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
                   )),
             );
           },

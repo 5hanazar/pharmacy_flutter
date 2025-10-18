@@ -32,7 +32,7 @@ class _ProductCardState extends State<ProductCard> {
                     width: double.infinity,
                     height: (MediaQuery.of(context).size.width / 2)),
                 onTap: () {}),
-            Expanded(child: Padding(padding: const EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 0), child: Text(widget.product.name, maxLines: 3, style: const TextStyle(height: 1.2)))),
+            Expanded(child: Padding(padding: const EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 0), child: Text(widget.product.name, maxLines: 3, overflow: TextOverflow.ellipsis, style: const TextStyle(height: 1.2)))),
             Padding(
                 padding: const EdgeInsets.all(8),
                 child: Row(children: [
