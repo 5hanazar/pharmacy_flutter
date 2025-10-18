@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
         translations: MyTranslations(),
-        locale: prefs.getString("l") == "1" ? const Locale('ru', 'RU') : const Locale('tm', 'TM'),
+        locale: prefs.getInt("l") == 2 ? const Locale('tm', 'TM') : const Locale('ru', 'RU'),
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           useMaterial3: true,

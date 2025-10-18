@@ -20,7 +20,7 @@ class MainApi {
       options: Options(
         headers: {
           'Accept': "application/json",
-          'Cookie': "l=${prefs.getInt("lang") ?? 1};${prefs.getString("pharmacy_user") ?? ""}",
+          'Cookie': "l=${prefs.getInt("l") ?? 1};${prefs.getString("pharmacy_user") ?? ""}",
         },
       ),
     );
@@ -35,8 +35,8 @@ class MainApi {
     }
   }
 
-  Future<PagedProductDto> getProducts(int page, String groupCode, String query) {
-    return _fetch<PagedProductDto>('/products?p=$page&g=$groupCode&q=$query', PagedProductDto.fromJson);
+  Future<PagedProductDto> getProducts(int page, String groupCode, String sortBy, String query) {
+    return _fetch<PagedProductDto>('/products?p=$page&g=$groupCode&o=$sortBy&q=$query', PagedProductDto.fromJson);
   }
   Future<HomeDto> getHome() {
     return _fetch<HomeDto>('/', HomeDto.fromJson);
@@ -56,7 +56,7 @@ class MainApi {
           headers: {
             'Accept': "text/plain",
             "Content-Type": "application/json",
-            'Cookie': "l=${prefs.getInt("lang") ?? 1};${prefs.getString("pharmacy_user") ?? ""}",
+            'Cookie': "l=${prefs.getInt("l") ?? 1};${prefs.getString("pharmacy_user") ?? ""}",
           }
       ),
     );
@@ -77,7 +77,7 @@ class MainApi {
           headers: {
             'Accept': "application/json",
             "Content-Type": "multipart/form-data",
-            'Cookie': "l=${prefs.getInt("lang") ?? 1};${prefs.getString("pharmacy_user") ?? ""}",
+            'Cookie': "l=${prefs.getInt("l") ?? 1};${prefs.getString("pharmacy_user") ?? ""}",
           }
       ),
     );
@@ -92,7 +92,7 @@ class MainApi {
       options: Options(
           headers: {
             'Accept': "application/json",
-            'Cookie': "l=${prefs.getInt("lang") ?? 1};${prefs.getString("pharmacy_user") ?? ""}",
+            'Cookie': "l=${prefs.getInt("l") ?? 1};${prefs.getString("pharmacy_user") ?? ""}",
           }
       ),
     );
@@ -222,10 +222,12 @@ class RowDto {
 
 class HomeDto {
   final List<CategoryDto> categories;
+  final List<PharmacyDtoView> pharmacies;
   final List<RowDto> list;
 
   HomeDto({
     required this.categories,
+    required this.pharmacies,
     required this.list,
   });
 
@@ -236,6 +238,12 @@ class HomeDto {
         categories.add(CategoryDto.fromJson(v));
       });
     }
+    var pharmacies = <PharmacyDtoView>[];
+    if (json['pharmacies'] != null) {
+      json['pharmacies'].forEach((v) {
+        pharmacies.add(PharmacyDtoView.fromJson(v));
+      });
+    }
     var list = <RowDto>[];
     if (json['list'] != null) {
       json['list'].forEach((v) {
@@ -244,6 +252,7 @@ class HomeDto {
     }
     return HomeDto(
       categories: categories,
+      pharmacies: pharmacies,
       list: list,
     );
   }
@@ -373,6 +382,41 @@ class OrderRequestDtoView {
       lines: lines,
       total: json['total'],
       createdDate: json['createdDate'],
+    );
+  }
+}
+
+class PharmacyDtoView {
+  final int id;
+  final String name;
+  final String phone;
+  final List<String> phones;
+  final String address;
+  final String description;
+  final String createdDate;
+  final String modifiedDate;
+
+  PharmacyDtoView({
+    required this.id,
+    required this.name,
+    required this.phone,
+    required this.phones,
+    required this.address,
+    required this.description,
+    required this.createdDate,
+    required this.modifiedDate,
+  });
+
+  factory PharmacyDtoView.fromJson(Map<String, dynamic> json) {
+    return PharmacyDtoView(
+      id: json['id'],
+      name: json['name'],
+      phone: json['phone'],
+      phones: List<String>.from(json['phones']),
+      address: json['address'],
+      description: json['description'],
+      createdDate: json['createdDate'],
+      modifiedDate: json['modifiedDate'],
     );
   }
 }

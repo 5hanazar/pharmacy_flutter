@@ -6,6 +6,7 @@ import 'package:pharmacy/presentation/pages/page_products.dart';
 import 'package:pharmacy/presentation/views/card_product.dart';
 import 'package:pharmacy/presentation/views/dialog_language.dart';
 import 'package:pharmacy/presentation/views/view_error.dart';
+import 'package:pharmacy/presentation/views/view_pharmacy.dart';
 import 'package:pharmacy/resources/controller_home.dart';
 
 class HomePage extends StatefulWidget {
@@ -74,9 +75,20 @@ class _HomePageState extends State<HomePage> {
                   ],
                   if (controller.homeState.value != null) ...[
                     const SliverToBoxAdapter(child: _Caution()),
-                    SliverToBoxAdapter(child: _CategoriesHorizontal(list: controller.homeState.value!.categories, code: "", onClick: (code) {
+                    SliverToBoxAdapter(child: _CategoriesHorizontal(list: controller.homeState.value!.categories, onClick: (code) {
                       Get.to(() => ProductsPage(groupCode: code), preventDuplicates: false);
                     })),
+
+                    SliverToBoxAdapter(
+                      child: _Title(
+                        title: "Все аптеки",
+                        onMoreClick: () { },
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: _PharmaciesHorizontal(list: controller.homeState.value!.pharmacies, onClick: (_) {},),
+                    ),
+
                     ...controller.homeState.value!.list.expand((e) => [
                       SliverToBoxAdapter(
                         child: _Title(
@@ -121,10 +133,9 @@ class _Caution extends StatelessWidget {
 
 class _CategoriesHorizontal extends StatelessWidget {
   final List<CategoryDto> list;
-  final String code;
   final Function(String code) onClick;
 
-  const _CategoriesHorizontal({required this.list, required this.code, required this.onClick});
+  const _CategoriesHorizontal({required this.list, required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -201,5 +212,31 @@ class _ProductsHorizontal extends StatelessWidget {
                 itemBuilder: (context, index) => ProductCard(product: list[index]),
                 itemCount: list.length),
           );
+  }
+}
+
+class _PharmaciesHorizontal extends StatelessWidget {
+  final List<PharmacyDtoView> list;
+  final Function(String code) onClick;
+
+  const _PharmaciesHorizontal({required this.list, required this.onClick});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 100,
+      child: PageView.builder(
+          padEnds: false,
+          controller: PageController(viewportFraction: 0.7),
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                onClick(list[index].name);
+              },
+              child: PharmacyView(pharmacy: list[index]),
+            );
+          },
+          itemCount: list.length),
+    );
   }
 }

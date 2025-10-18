@@ -28,7 +28,8 @@ class _ProductsPageState extends State<ProductsPage> {
 
   String _title = "";
   String _searchTerm = "";
-  int _sortBy = 0;
+  String _sortBy = "";
+  String _sortLabel = "";
   final PagingController<int, ProductDto> _pagingController = PagingController(firstPageKey: 0);
 
   Future<void> _fetchPage(int pageKey) async {
@@ -44,7 +45,7 @@ class _ProductsPageState extends State<ProductsPage> {
       return;
     }
     try {
-      final result = await repo.getProducts(pageKey + 1, widget.groupCode, _searchTerm);
+      final result = await repo.getProducts(pageKey + 1, widget.groupCode, _sortBy, _searchTerm);
       setState(() {
         _title = result.groupName;
       });
@@ -61,11 +62,49 @@ class _ProductsPageState extends State<ProductsPage> {
     }
   }
 
-  void changeSort(int value) {
-    Get.back();
+  void _changeSort(String value) {
     if (_sortBy == value) return;
     _sortBy = value;
     _pagingController.refresh();
+  }
+
+  void _showListDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: const Text('Сортировка'),
+          children: <Widget>[
+            SimpleDialogOption(
+              onPressed: () { Navigator.pop(context, ['', '']); },
+              child: Text('sort1'.tr),
+            ),
+            SimpleDialogOption(
+              onPressed: () { Navigator.pop(context, ['namesJ;ascending', "${'sort2'.tr} ↑"]); },
+              child: Text("${'sort2'.tr} ↑ (A-Z)"),
+            ),
+            SimpleDialogOption(
+              onPressed: () { Navigator.pop(context, ['namesJ;descending', "${'sort2'.tr} ↓"]); },
+              child: Text("${'sort2'.tr} ↓ (Z-A)"),
+            ),
+            SimpleDialogOption(
+              onPressed: () { Navigator.pop(context, ['price;ascending', "${'sort3'.tr} ↑"]); },
+              child: Text("${'sort3'.tr} ↑ (${'sort_price1'.tr})"),
+            ),
+            SimpleDialogOption(
+              onPressed: () { Navigator.pop(context, ['price;descending', "${'sort3'.tr} ↓"]); },
+              child: Text("${'sort3'.tr} ↓ (${'sort_price2'.tr})"),
+            ),
+          ],
+        );
+      },
+    ).then((selectedOption) {
+      if (selectedOption != null) {
+        _sortLabel = selectedOption[1];
+        _changeSort(selectedOption[0]);
+        //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('You selected: $selectedOption')));
+      }
+    });
   }
 
   @override
@@ -76,29 +115,39 @@ class _ProductsPageState extends State<ProductsPage> {
           SliverAppBar(
             floating: true,
             pinned: true,
+            titleSpacing: 8,
             title: Text(_title, style: const TextStyle(fontWeight: FontWeight.bold)),
+            actions: [
+              Container(margin: const EdgeInsets.symmetric(horizontal: 16), child: Text(_sortLabel))
+            ],
             bottom: AppBar(
               automaticallyImplyLeading: false,
-              title: TextField(
-                onSubmitted: (query) {
-                  _searchTerm = query;
-                  _pagingController.refresh();
-                },
-                autofocus: false,
-                decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.search),
-                      onPressed: () {},
-                    ),
-                    hintText: "search".tr,
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      borderSide: BorderSide(width: 2, color: Colors.grey.shade400),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white),
+              titleSpacing: 4,
+              actions: [
+                Container(margin: const EdgeInsets.only(right: 8), child: IconButton(onPressed: () {
+                  _showListDialog(context);
+                }, icon: const Icon(Icons.sort)))
+              ],
+              title: Container(
+                margin: const EdgeInsets.only(left: 10),
+                child: TextField(
+                  onSubmitted: (query) {
+                    _searchTerm = query;
+                    _pagingController.refresh();
+                  },
+                  autofocus: false,
+                  decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                      suffixIcon: const Icon(Icons.search),
+                      hintText: "search".tr,
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        borderSide: BorderSide(width: 2, color: Colors.grey.shade400),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white),
+                ),
               ),
             ),
           ),

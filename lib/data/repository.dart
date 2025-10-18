@@ -9,8 +9,8 @@ class RepositoryImpl implements Repository {
   RepositoryImpl(this._prefs, this._apiMain);
 
   @override
-  Future<PagedProductDto> getProducts(int page, String groupCode, String query) {
-    return _apiMain.getProducts(page, groupCode, query);
+  Future<PagedProductDto> getProducts(int page, String groupCode, String sortBy, String query) {
+    return _apiMain.getProducts(page, groupCode, sortBy, query);
   }
 
   @override
@@ -45,6 +45,6 @@ class RepositoryImpl implements Repository {
 
   @override
   Future<void> setLanguage(int lang) {
-    return _prefs.setInt("lang", lang);
+    return _prefs.setInt("l", lang);
   }
 }

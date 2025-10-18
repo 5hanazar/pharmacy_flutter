@@ -20,7 +20,7 @@ class MyTranslations extends Translations {
       'cancel': 'Отменить',
       'yes': 'Да',
       'no': 'Нет',
-      'all_products': 'Все продукты',
+      'all_products': 'Все товары',
       'approximate_total': 'Примерная сумма',
       'phone': 'Телефон',
       'address': 'Адрес',
@@ -28,6 +28,11 @@ class MyTranslations extends Translations {
       'fill_up': 'Заполните',
       'text1': 'Указанные цены товаров являются приблизительными.\nНастоящую стоимость сообщат аптеки после принятия вашего запроса.',
       'text2': 'После подтверждения ваш запрос будет отправлен во все аптеки.\nВы можете отменить его в любое время.',
+      'sort1': 'По умолчанию',
+      'sort2': 'По названию',
+      'sort3': 'По цене',
+      'sort_price1': 'сначала дешевые',
+      'sort_price2': 'сначала дорогие',
     },
     'tm_TM': {
       'products': 'Harytlar',
@@ -54,6 +59,11 @@ class MyTranslations extends Translations {
       'fill_up': 'Dolduryň',
       'text1': 'Harytlaryň ýakynlaşan bahalary görkezilendir.\nHakyky bahany dermanhanalar siziň talabyňyzy kabul edenden soň habar bererler.',
       'text2': '"Tassykla" basanyňyzdan soň, siziň islegiňiz ähli dermanhanalara iberiler.\nSiz ony islendik wagt ýatyryp bilersiňiz.',
+      'sort1': 'Adaty',
+      'sort2': 'Ady boýunça',
+      'sort3': 'Bahasy boýunça',
+      'sort_price1': 'arzanlar öňde',
+      'sort_price2': 'gymmatlar öňde',
     }
   };
 }
