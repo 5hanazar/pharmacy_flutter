@@ -79,15 +79,20 @@ class _HomePageState extends State<HomePage> {
                       Get.to(() => ProductsPage(groupCode: code), preventDuplicates: false);
                     })),
 
-                    SliverToBoxAdapter(
-                      child: _Title(
-                        title: "Все аптеки",
-                        onMoreClick: () { },
+                    if (controller.homeState.value!.pharmacies.isNotEmpty) ...[
+                      SliverToBoxAdapter(
+                        child: _Title(
+                          title: "all_pharmacies".tr,
+                          onMoreClick: () {},
+                        ),
                       ),
-                    ),
-                    SliverToBoxAdapter(
-                      child: _PharmaciesHorizontal(list: controller.homeState.value!.pharmacies, onClick: (_) {},),
-                    ),
+                      SliverToBoxAdapter(
+                        child: _PharmaciesHorizontal(
+                          list: controller.homeState.value!.pharmacies,
+                          onClick: (_) {},
+                        ),
+                      )
+                    ],
 
                     ...controller.homeState.value!.list.expand((e) => [
                       SliverToBoxAdapter(

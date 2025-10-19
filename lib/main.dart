@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         translations: MyTranslations(),
         locale: prefs.getInt("l") == 2 ? const Locale('tm', 'TM') : const Locale('ru', 'RU'),
         theme: ThemeData(
