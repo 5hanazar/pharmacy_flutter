@@ -140,10 +140,14 @@ class _ProductsPageState extends State<ProductsPage> {
                       contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
                       suffixIcon: const Icon(Icons.search),
                       hintText: "search".tr,
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
-                        borderSide: BorderSide(width: 2, color: Colors.grey.shade400),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(22)),
+                      enabledBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(22)),
+                        borderSide: BorderSide(width: 0.5, color: Colors.blue),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(22)),
+                        borderSide: BorderSide(width: 1.5, color: Colors.blue),
                       ),
                       filled: true,
                       fillColor: Colors.white),

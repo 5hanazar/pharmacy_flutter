@@ -31,19 +31,24 @@ class MyApp extends StatelessWidget {
         translations: MyTranslations(),
         locale: prefs.getInt("l") == 2 ? const Locale('tm', 'TM') : const Locale('ru', 'RU'),
         theme: ThemeData(
+          fontFamily: 'FontUI',
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           useMaterial3: true,
           cardTheme: CardTheme(
+              elevation: 0,
               color: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
+                side: const BorderSide(color: Colors.blue, width: 0.5),
               )),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue.shade400,
-              disabledBackgroundColor: Colors.blue.shade400,
-              foregroundColor: Colors.white,
-              disabledForegroundColor: Colors.white,
+              backgroundColor: Colors.blue.shade50,
+              disabledBackgroundColor: Colors.blue.shade50,
+              foregroundColor: Colors.blue.shade700,
+              disabledForegroundColor: Colors.blue.shade700,
+            ).copyWith(
+              elevation: WidgetStateProperty.all(0.0),
             ),
           ),
         ),

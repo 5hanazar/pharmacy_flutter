@@ -35,7 +35,7 @@ class _ProductRowState extends State<ProductRow> {
               padding: const EdgeInsets.all(12),
               child: Column(
                 children: [
-                  Text(widget.product.name, maxLines: 3, style: const TextStyle(height: 1.2)),
+                  Text(widget.product.name, maxLines: 4, overflow: TextOverflow.ellipsis, style: const TextStyle(height: 1.2)),
                   Container(
                     margin: const EdgeInsets.only(top: 8),
                     child: Row(children: [

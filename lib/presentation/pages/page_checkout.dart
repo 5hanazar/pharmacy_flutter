@@ -109,6 +109,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     child: SizedBox(
                       width: 180,
                       child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue.shade400,
+                            disabledBackgroundColor: Colors.blue.shade400,
+                            foregroundColor: Colors.white,
+                            disabledForegroundColor: Colors.white,
+                          ),
                           onPressed: _isLoading
                               ? null
                               : () async {

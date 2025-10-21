@@ -49,20 +49,24 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Şypa", style: TextStyle(color: Colors.blue.shade900, fontWeight: FontWeight.bold)), actions: [
-          IconButton(
-            onPressed: () {
-              _showLanguageDialog(context);
-            },
-            icon: const Icon(Icons.translate),
-          ),
-          IconButton(
-            onPressed: () {
-              Get.to(() => const ProductsPage(groupCode: ""), preventDuplicates: false);
-            },
-            icon: const Icon(Icons.search),
-          )
-        ]),
+        appBar: AppBar(
+            title: Text("Şypa", style: TextStyle(color: Colors.blue.shade900, fontWeight: FontWeight.bold)),
+            titleSpacing: 8,
+            leading: Padding(padding: const EdgeInsets.only(left: 10, top: 6, right: 0, bottom: 6), child: Image.asset('assets/ic_launcher.png')),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  _showLanguageDialog(context);
+                },
+                icon: const Icon(Icons.translate),
+              ),
+              IconButton(
+                onPressed: () {
+                  Get.to(() => const ProductsPage(groupCode: ""), preventDuplicates: false);
+                },
+                icon: const Icon(Icons.search),
+              )
+            ]),
         body: RefreshIndicator(
             key: _refreshIndicatorKey,
             onRefresh: refreshList,
@@ -156,7 +160,11 @@ class _CategoriesHorizontal extends StatelessWidget {
               },
               child: Card(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(26),
+                    side: const BorderSide(
+                      color: Colors.blue, // Border color
+                      width: 0.5, // Border width
+                    ),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
