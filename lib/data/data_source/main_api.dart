@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const base = "http://10.0.2.2:5173/shypa";
+const base = "https://altynmarket.com.tm/shypa";
 
 class MainApi {
   final dio = Dio(
@@ -46,6 +46,9 @@ class MainApi {
   }
   Future<PagedOrderRequestDto> getOrderRequests() {
     return _fetch<PagedOrderRequestDto>('/orders', PagedOrderRequestDto.fromJson);
+  }
+  Future<ProductAndSimilarDto> getProductById(int id) {
+    return _fetch<ProductAndSimilarDto>('/products/$id', ProductAndSimilarDto.fromJson);
   }
 
   Future<num> postBasket(PostAdditionDto dto) async {
@@ -99,6 +102,21 @@ class MainApi {
     if (response.statusCode != 200) {
       throw Exception('${response.statusCode}');
     }
+  }
+}
+
+class ProductAndSimilarDto {
+  final ProductDto product;
+  final List<ProductDto> similar;
+
+  ProductAndSimilarDto({required this.product, required this.similar});
+
+  factory ProductAndSimilarDto.fromJson(Map<String, dynamic> json) {
+    var similar = <ProductDto>[];
+    json['similar'].forEach((v) {
+      similar.add(ProductDto.fromJson(v));
+    });
+    return ProductAndSimilarDto(product: ProductDto.fromJson(json['product']), similar: similar);
   }
 }
 

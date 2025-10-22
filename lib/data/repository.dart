@@ -14,6 +14,11 @@ class RepositoryImpl implements Repository {
   }
 
   @override
+  Future<ProductAndSimilarDto> getProductById(int id) {
+    return _apiMain.getProductById(id);
+  }
+
+  @override
   Future<HomeDto> getHome() {
     return _apiMain.getHome();
   }

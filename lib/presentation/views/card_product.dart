@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy/data/data_source/main_api.dart';
+import 'package:pharmacy/presentation/pages/page_product.dart';
 import 'package:pharmacy/resources/controller_basket.dart';
 
 class ProductCard extends StatefulWidget {
@@ -31,7 +32,9 @@ class _ProductCardState extends State<ProductCard> {
                     cacheKey: widget.product.images[0],
                     width: double.infinity,
                     height: (MediaQuery.of(context).size.width / 2)),
-                onTap: () {}),
+                onTap: () {
+                  Get.to(() => ProductPage(id: widget.product.id), preventDuplicates: false);
+                }),
             Expanded(child: Padding(padding: const EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 0), child: Text(widget.product.name, maxLines: 3, overflow: TextOverflow.ellipsis, style: const TextStyle(height: 1.2)))),
             Padding(
                 padding: const EdgeInsets.all(8),

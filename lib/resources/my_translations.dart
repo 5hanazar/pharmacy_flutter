@@ -33,6 +33,8 @@ class MyTranslations extends Translations {
       'sort1': 'По умолчанию',
       'sort2': 'По названию',
       'sort3': 'По цене',
+      'error_connection': 'Проверьте подключение к Интернету.',
+      'error_unknown': 'Что-то пошло не так.',
       'sort_price1': 'сначала дешевые',
       'sort_price2': 'сначала дорогие',
     },
@@ -66,6 +68,8 @@ class MyTranslations extends Translations {
       'sort1': 'Adaty',
       'sort2': 'Ady boýunça',
       'sort3': 'Bahasy boýunça',
+      'error_connection': 'Internet birikmäňizi barlaň.',
+      'error_unknown': 'Ýalňyşlyk döredi.',
       'sort_price1': 'arzanlar öňde',
       'sort_price2': 'gymmatlar öňde',
     }
