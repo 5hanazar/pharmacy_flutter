@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const base = "https://altynmarket.com.tm/shypa";
+const base = "http://10.0.2.2:5173/shypa";
 
 class MainApi {
   final dio = Dio(
