@@ -37,6 +37,11 @@ class MyTranslations extends Translations {
       'error_unknown': 'Что-то пошло не так.',
       'sort_price1': 'сначала дешевые',
       'sort_price2': 'сначала дорогие',
+      'name': 'Названия',
+      'group': 'Группа',
+      'barcode': 'Бар-код',
+      'price': 'Цена',
+      'similar': 'Похожие товары',
     },
     'tm_TM': {
       'products': 'Harytlar',
@@ -72,6 +77,11 @@ class MyTranslations extends Translations {
       'error_unknown': 'Ýalňyşlyk döredi.',
       'sort_price1': 'arzanlar öňde',
       'sort_price2': 'gymmatlar öňde',
+      'name': 'Ady',
+      'group': 'Grupba',
+      'barcode': 'Barkod',
+      'price': 'Bahasy',
+      'similar': 'Meňzeş harytlar',
     }
   };
 }
