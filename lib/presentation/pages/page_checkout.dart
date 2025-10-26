@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy/data/data_source/main_api.dart';
+import 'package:pharmacy/main.dart';
 import 'package:pharmacy/resources/controller_basket.dart';
 
 class CheckoutPage extends StatefulWidget {
@@ -126,7 +127,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                     Get.back();
                                   } on Exception catch (error, _) {
                                     Fluttertoast.showToast(
-                                        msg: error.toString(),
+                                        msg: errorFormat(error.toString()),
                                         backgroundColor: Colors.red,
                                         gravity: ToastGravity.TOP);
                                   }

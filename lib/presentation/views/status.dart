@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pharmacy/main.dart';
 
 class Status extends StatelessWidget {
   final String msg;
   final Function() onRefresh;
-
-  String _errorFormat(String error) {
-    if (error.contains("connection")) {
-      return "error_connection".tr;
-    } else {
-      return "error_unknown".tr;
-    }
-  }
 
   const Status({super.key, required this.msg, required this.onRefresh});
 
@@ -24,7 +17,7 @@ class Status extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              _errorFormat(msg),
+              errorFormat(msg),
               textAlign: TextAlign.center,
               maxLines: 1,
               style: const TextStyle(fontSize: 16),

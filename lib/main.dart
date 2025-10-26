@@ -112,3 +112,11 @@ class MyBottomNav extends StatelessWidget {
     );
   }
 }
+
+String errorFormat(String error) {
+  if (error.contains("connection")) {
+    return "error_connection".tr;
+  } else {
+    return "error_unknown".tr;
+  }
+}
