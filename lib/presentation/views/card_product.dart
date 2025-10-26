@@ -23,15 +23,18 @@ class _ProductCardState extends State<ProductCard> {
         child: Card(
           child: Column(children: [
             GestureDetector(
-                child: CachedNetworkImage(
-                    imageUrl: '$base/images/${widget.product.images[0]}',
-                    placeholder: (context, url) => Image.asset('assets/no_image.webp'),
-                    fadeInDuration: const Duration(milliseconds: 200),
-                    fadeOutDuration: const Duration(milliseconds: 200),
-                    errorWidget: (context, url, error) => Image.asset('assets/no_image.webp'),
-                    cacheKey: widget.product.images[0],
-                    width: double.infinity,
-                    height: (MediaQuery.of(context).size.width / 2)),
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: CachedNetworkImage(
+                      imageUrl: '$base/images/${widget.product.images[0]}',
+                      placeholder: (context, url) => Image.asset('assets/no_image.webp'),
+                      fadeInDuration: const Duration(milliseconds: 200),
+                      fadeOutDuration: const Duration(milliseconds: 200),
+                      errorWidget: (context, url, error) => Image.asset('assets/no_image.webp'),
+                      cacheKey: widget.product.images[0],
+                      width: double.infinity,
+                      height: (MediaQuery.of(context).size.width / 2) - 24),
+                ),
                 onTap: () {
                   Get.to(() => ProductPage(id: widget.product.id), preventDuplicates: false);
                 }),

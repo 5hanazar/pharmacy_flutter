@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy/data/data_source/main_api.dart';
+import 'package:pharmacy/presentation/pages/page_product.dart';
 import 'package:pharmacy/resources/controller_basket.dart';
 
 class ProductRow extends StatefulWidget {
@@ -22,15 +23,20 @@ class _ProductRowState extends State<ProductRow> {
         child: Card(
           child: Row(children: [
             GestureDetector(
-                child: CachedNetworkImage(
-                    imageUrl: '$base/images/${widget.product.images[0]}',
-                    placeholder: (context, url) => Image.asset('assets/no_image.webp'),
-                    fadeInDuration: const Duration(milliseconds: 200),
-                    fadeOutDuration: const Duration(milliseconds: 200),
-                    errorWidget: (context, url, error) => Image.asset('assets/no_image.webp'),
-                    cacheKey: widget.product.images[0],
-                    width: 140, height: 140),
-                onTap: () {}),
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: CachedNetworkImage(
+                      imageUrl: '$base/images/${widget.product.images[0]}',
+                      placeholder: (context, url) => Image.asset('assets/no_image.webp'),
+                      fadeInDuration: const Duration(milliseconds: 200),
+                      fadeOutDuration: const Duration(milliseconds: 200),
+                      errorWidget: (context, url, error) => Image.asset('assets/no_image.webp'),
+                      cacheKey: widget.product.images[0],
+                      width: 124, height: 124),
+                ),
+                onTap: () {
+                  Get.to(() => ProductPage(id: widget.product.id), preventDuplicates: false);
+                }),
             Expanded(child: Padding(
               padding: const EdgeInsets.all(12),
               child: Column(

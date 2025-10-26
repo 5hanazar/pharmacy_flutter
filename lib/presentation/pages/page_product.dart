@@ -59,14 +59,17 @@ class _ProductPageState extends State<ProductPage> {
                   collapseMode: CollapseMode.none,
                   background: Stack(
                     children: [
-                      Container(
+                      ColoredBox(
                         color: Colors.white,
-                        child: CachedNetworkImage(
-                            imageUrl: '$base/images/${snapshot.data!.product.images[0]}',
-                            errorWidget: (context, url, error) => Align(alignment: Alignment.center, child: Icon(Icons.no_photography, color: Colors.black.withOpacity(0.2), size: 100)),
-                            cacheKey: snapshot.data!.product.images[0],
-                            fit: BoxFit.cover,
-                            height: MediaQuery.sizeOf(context).width),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 32, right: 24, bottom: 16, left: 24),
+                          child: CachedNetworkImage(
+                              imageUrl: '$base/images/${snapshot.data!.product.images[0]}',
+                              errorWidget: (context, url, error) => Align(alignment: Alignment.center, child: Icon(Icons.no_photography, color: Colors.black.withOpacity(0.2), size: 100)),
+                              cacheKey: snapshot.data!.product.images[0],
+                              fit: BoxFit.cover,
+                              height: (MediaQuery.sizeOf(context).width) - 48),
+                        ),
                       ),
                       Container(
                         height: 56 + MediaQuery.of(context).viewPadding.top,
