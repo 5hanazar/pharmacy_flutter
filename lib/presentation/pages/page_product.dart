@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy/data/data_source/main_api.dart';
 import 'package:pharmacy/data/repository.dart';
@@ -23,10 +24,6 @@ class _ProductPageState extends State<ProductPage> {
     super.initState();
   }
 
-  Future<void> refreshList() async {
-    //await controller.refreshProduct();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +31,10 @@ class _ProductPageState extends State<ProductPage> {
           future: _repo.getProductById(widget.id),
           builder: (BuildContext context, AsyncSnapshot<ProductAndSimilarDto> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return const AnnotatedRegion<SystemUiOverlayStyle>(
+                value: SystemUiOverlayStyle.dark,
+                child: Center(child: CircularProgressIndicator()),
+              );
             }
             return CustomScrollView(scrollBehavior: const ScrollBehavior().copyWith(overscroll: false), slivers: [
               if (snapshot.hasData) ...[

@@ -29,7 +29,7 @@ class Status extends StatelessWidget {
               maxLines: 1,
               style: const TextStyle(fontSize: 16),
             ),
-            ElevatedButton(onPressed: onRefresh, style: TextButton.styleFrom(foregroundColor: Colors.white), child: Text("refresh".tr))
+            ElevatedButton(onPressed: onRefresh, child: Text("refresh".tr))
           ],
         ),
       ),
