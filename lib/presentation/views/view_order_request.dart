@@ -34,10 +34,10 @@ class OrderRequestView extends StatelessWidget {
                     dataRowMinHeight: 30,
                     dataRowMaxHeight: 30,
                     headingRowHeight: 30,
-                    columns: const <DataColumn>[
-                      DataColumn(label: Text('Кол.')),
-                      DataColumn(label: Text('Товар')),
-                      DataColumn(label: Text('Цена')),
+                    columns: <DataColumn>[
+                      DataColumn(label: Text('amount'.tr)),
+                      DataColumn(label: Text('product'.tr)),
+                      DataColumn(label: Text('price'.tr)),
                     ],
                     rows: order.lines.map((line) {
                       return DataRow(

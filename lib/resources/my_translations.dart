@@ -42,6 +42,8 @@ class MyTranslations extends Translations {
       'barcode': 'Бар-код',
       'price': 'Цена',
       'similar': 'Похожие товары',
+      'amount': 'Кол.',
+      'product': 'Товар',
     },
     'tm_TM': {
       'products': 'Harytlar',
@@ -82,6 +84,8 @@ class MyTranslations extends Translations {
       'barcode': 'Barkod',
       'price': 'Bahasy',
       'similar': 'Meňzeş harytlar',
+      'amount': 'Mukdar',
+      'product': 'Haryt',
     }
   };
 }
