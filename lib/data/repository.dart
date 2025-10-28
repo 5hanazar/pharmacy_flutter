@@ -14,6 +14,11 @@ class RepositoryImpl implements Repository {
   }
 
   @override
+  Future<PagedPharmacyDto> getPharmacies(int page, String sortBy, String query) {
+    return _apiMain.getPharmacies(page, sortBy, query);
+  }
+
+  @override
   Future<ProductAndSimilarDto> getProductById(int id) {
     return _apiMain.getProductById(id);
   }

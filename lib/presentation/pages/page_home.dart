@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy/data/data_source/main_api.dart';
 import 'package:pharmacy/domain/data_state.dart';
+import 'package:pharmacy/presentation/pages/page_pharmacies.dart';
 import 'package:pharmacy/presentation/pages/page_products.dart';
 import 'package:pharmacy/presentation/views/card_product.dart';
 import 'package:pharmacy/presentation/views/dialog_language.dart';
@@ -87,7 +88,9 @@ class _HomePageState extends State<HomePage> {
                       SliverToBoxAdapter(
                         child: _Title(
                           title: "all_pharmacies".tr,
-                          onMoreClick: () {},
+                          onMoreClick: () {
+                            Get.to(() => const PharmaciesPage(), preventDuplicates: false);
+                          },
                         ),
                       ),
                       SliverToBoxAdapter(

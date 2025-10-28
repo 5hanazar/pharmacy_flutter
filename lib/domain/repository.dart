@@ -6,6 +6,7 @@ abstract class Repository {
   Future<HomeDto> getHome();
   Future<BasketDto> getBasket();
   Future<PagedOrderRequestDto> getOrderRequests();
+  Future<PagedPharmacyDto> getPharmacies(int page, String sortBy, String query);
   Future<num> postBasket(PostAdditionDto dto);
   Future<void> postCheckout(PostOrderRequestDto dto);
   Future<void> deleteOrderRequest(int id);

@@ -50,6 +50,9 @@ class MainApi {
   Future<ProductAndSimilarDto> getProductById(int id) {
     return _fetch<ProductAndSimilarDto>('/products/$id', ProductAndSimilarDto.fromJson);
   }
+  Future<PagedPharmacyDto> getPharmacies(int page, String sortBy, String query) {
+    return _fetch<PagedPharmacyDto>('/pharmacies?p=$page&o=$sortBy&q=$query', PagedPharmacyDto.fromJson);
+  }
 
   Future<num> postBasket(PostAdditionDto dto) async {
     final response = await dio.post(
@@ -436,5 +439,22 @@ class PharmacyDtoView {
       createdDate: json['createdDate'],
       modifiedDate: json['modifiedDate'],
     );
+  }
+}
+
+class PagedPharmacyDto {
+  final int count;
+  final List<PharmacyDtoView> data;
+  final int size;
+  final int pageIndex;
+
+  PagedPharmacyDto({required this.count, required this.data, required this.size, required this.pageIndex});
+
+  factory PagedPharmacyDto.fromJson(Map<String, dynamic> json) {
+    var data = <PharmacyDtoView>[];
+    json['data'].forEach((v) {
+      data.add(PharmacyDtoView.fromJson(v));
+    });
+    return PagedPharmacyDto(count: json['count'], data: data, size: json['size'], pageIndex: json['pageIndex']);
   }
 }
