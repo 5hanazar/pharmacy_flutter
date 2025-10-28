@@ -1,3 +1,4 @@
+import 'package:barcode_widgets/barcode_flutter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -95,69 +96,74 @@ class _ProductPageState extends State<ProductPage> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-                  child: Table(columnWidths: const <int, TableColumnWidth>{
-                    0: IntrinsicColumnWidth(),
-                    1: FlexColumnWidth()
-                  }, children: <TableRow>[
-                    TableRow(children: [
-                      Text("${"name".tr}:\u00A0\u00A0", textAlign: TextAlign.end, style: const TextStyle(fontWeight: FontWeight.bold)),
-                      Text(snapshot.data!.product.name, style: const TextStyle(height: 1.2))
-                    ]),
-                    TableRow(children: [
-                      Text("${"group".tr}:\u00A0\u00A0", textAlign: TextAlign.end, style: const TextStyle(fontWeight: FontWeight.bold)),
-                      Text(snapshot.data!.product.groupName)
-                    ]),
-                    TableRow(children: [
-                      Text("${"barcode".tr}:\u00A0\u00A0", textAlign: TextAlign.end, style: const TextStyle(fontWeight: FontWeight.bold)),
-                      Text(snapshot.data!.product.barcode)
-                    ]),
-                    TableRow(children: [
-                      Text("${"price".tr}:\u00A0\u00A0", textAlign: TextAlign.end, style: const TextStyle(fontWeight: FontWeight.bold)),
-                      Text(snapshot.data!.product.price.toString())
-                    ]),
-                    TableRow(children: [
-                      const Text(""),
-                      GetBuilder<BasketController>(builder: (controller) {
-                        final v = controller.basketState.value?.products.firstWhereOrNull((element) => element.id == widget.id)?.inBasket ?? 0;
-                        return v > 0
-                            ? Row(
-                                children: [
-                                  SizedBox(
-                                    width: 44,
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(snapshot.data!.product.name, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, height: 1.2)),
+                      Container(margin: const EdgeInsets.only(top: 6), child: Text(snapshot.data!.product.groupName, style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic))),
+                      Container(
+                        margin: const EdgeInsets.only(top: 16, bottom: 26),
+                        child: Row(children: [
+                          Text("~${snapshot.data!.product.price} ", style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.blue)),
+                          const Text("TMT", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blue)),
+                          const Spacer(),
+                          BarCodeImage(
+                            params: Code128BarCodeParams(
+                              snapshot.data!.product.barcode,
+                              lineWidth: 1,
+                              barHeight: 50,
+                              withText: true,
+                            ),
+                          )
+                        ]),
+                      ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: SizedBox(
+                          width: 180,
+                          child: GetBuilder<BasketController>(builder: (controller) {
+                            final v = controller.basketState.value?.products.firstWhereOrNull((element) => element.id == widget.id)?.inBasket ?? 0;
+                            return v > 0
+                                ? Row(
+                                    children: [
+                                      SizedBox(
+                                        width: 44,
+                                        height: 44,
+                                        child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 24), padding: EdgeInsets.zero),
+                                            onPressed: () {
+                                              controller.postBasket(PostAdditionDto(productId: widget.id, addition: -1));
+                                            },
+                                            child: const Text("−")),
+                                      ),
+                                      Expanded(child: Text(v.toString(), style: const TextStyle(fontSize: 18), textAlign: TextAlign.center)),
+                                      SizedBox(
+                                        width: 44,
+                                        height: 44,
+                                        child: ElevatedButton(
+                                            style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 24), padding: EdgeInsets.zero),
+                                            onPressed: () {
+                                              controller.postBasket(PostAdditionDto(productId: widget.id, addition: 1));
+                                            },
+                                            child: const Text("+")),
+                                      )
+                                    ],
+                                  )
+                                : SizedBox(
+                                    width: double.infinity,
                                     height: 44,
                                     child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 24), padding: EdgeInsets.zero),
-                                        onPressed: () {
-                                          controller.postBasket(PostAdditionDto(productId: widget.id, addition: -1));
-                                        },
-                                        child: const Text("−")),
-                                  ),
-                                  Expanded(child: Text(v.toString(), style: const TextStyle(fontSize: 18), textAlign: TextAlign.center)),
-                                  SizedBox(
-                                    width: 44,
-                                    height: 44,
-                                    child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 24), padding: EdgeInsets.zero),
                                         onPressed: () {
                                           controller.postBasket(PostAdditionDto(productId: widget.id, addition: 1));
                                         },
-                                        child: const Text("+")),
-                                  )
-                                ],
-                              )
-                            : SizedBox(
-                                width: double.infinity,
-                                height: 44,
-                                child: ElevatedButton(
-                                    onPressed: () {
-                                      controller.postBasket(PostAdditionDto(productId: widget.id, addition: 1));
-                                    },
-                                    child: Text("add_to_basket".tr)),
-                              );
-                      })
-                    ])
-                  ]),
+                                        child: Text("add_to_basket".tr)),
+                                  );
+                          }),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               )),
               SliverToBoxAdapter(
