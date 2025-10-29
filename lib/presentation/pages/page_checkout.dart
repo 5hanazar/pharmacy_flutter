@@ -44,7 +44,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         color: Colors.blue.shade50,
                         border: Border.all(
                           color: Colors.blue,
-                          width: 1,
+                          width: 0.5,
                         ),
                         borderRadius: BorderRadius.circular(16),
                       ),

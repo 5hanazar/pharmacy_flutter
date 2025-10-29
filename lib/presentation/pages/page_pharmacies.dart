@@ -58,27 +58,30 @@ class _PharmaciesPageState extends State<PharmaciesPage> {
             bottom: AppBar(
               automaticallyImplyLeading: false,
               titleSpacing: 4,
-              title: TextField(
-                onSubmitted: (query) {
-                  _searchTerm = query;
-                  _pagingController.refresh();
-                },
-                autofocus: false,
-                decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-                    suffixIcon: const Icon(Icons.search),
-                    hintText: "search".tr,
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(22)),
-                    enabledBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(22)),
-                      borderSide: BorderSide(width: 0.5, color: Colors.blue),
-                    ),
-                    focusedBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(22)),
-                      borderSide: BorderSide(width: 1.5, color: Colors.blue),
-                    ),
-                    filled: true,
-                    fillColor: Colors.white),
+              title: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 6),
+                child: TextField(
+                  onSubmitted: (query) {
+                    _searchTerm = query;
+                    _pagingController.refresh();
+                  },
+                  autofocus: false,
+                  decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                      suffixIcon: const Icon(Icons.search),
+                      hintText: "search".tr,
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(22)),
+                      enabledBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(22)),
+                        borderSide: BorderSide(width: 0.5, color: Colors.blue),
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(22)),
+                        borderSide: BorderSide(width: 1.5, color: Colors.blue),
+                      ),
+                      filled: true,
+                      fillColor: Colors.white),
+                ),
               ),
             ),
           ),

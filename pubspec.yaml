@@ -44,6 +44,7 @@ dependencies:
   dio: ^5.8.0+1
   fluttertoast: ^8.2.12
   barcode_widgets: ^2.0.0
+  lottie: ^3.1.3
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +72,7 @@ flutter:
   assets:
      - assets/no_image.webp
      - assets/ic_launcher.png
+     - assets/empty_box.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

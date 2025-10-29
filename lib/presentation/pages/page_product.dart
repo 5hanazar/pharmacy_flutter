@@ -103,7 +103,7 @@ class _ProductPageState extends State<ProductPage> {
                       Text(snapshot.data!.product.name, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, height: 1.2)),
                       Container(margin: const EdgeInsets.only(top: 6), child: Text(snapshot.data!.product.groupName, style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic))),
                       Container(
-                        margin: const EdgeInsets.only(top: 16, bottom: 26),
+                        margin: const EdgeInsets.only(top: 16, bottom: 28),
                         child: Row(children: [
                           Text("~${snapshot.data!.product.price} ", style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.blue)),
                           const Text("TMT", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blue)),
