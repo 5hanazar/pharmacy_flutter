@@ -44,6 +44,7 @@ class MyTranslations extends Translations {
       'similar': 'Похожие товары',
       'amount': 'Кол.',
       'product': 'Товар',
+      'empty_basket': 'Корзина пуста. Добавьте товары.',
     },
     'tm_TM': {
       'products': 'Harytlar',
@@ -86,6 +87,7 @@ class MyTranslations extends Translations {
       'similar': 'Meňzeş harytlar',
       'amount': 'Mukdar',
       'product': 'Haryt',
+      'empty_basket': 'Sebediňiz boş. Haryt goşuň.',
     }
   };
 }

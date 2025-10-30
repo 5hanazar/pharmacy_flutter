@@ -72,7 +72,7 @@ flutter:
   assets:
      - assets/no_image.webp
      - assets/ic_launcher.png
-     - assets/empty_box.json
+     - assets/empty_basket.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

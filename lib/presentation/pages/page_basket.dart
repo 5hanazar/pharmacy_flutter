@@ -50,24 +50,35 @@ class _BasketPageState extends State<BasketPage> {
             onRefresh: refreshList,
             backgroundColor: Colors.white,
             child: GetBuilder<BasketController>(builder: (controller) {
-              return CustomScrollView(
-                slivers: [
-                  if (controller.basketState is MyErrorState) ...[
-                    SliverToBoxAdapter(child: ErrorView(state: controller.basketState as MyErrorState)),
-                  ],
-                  if (controller.basketState.value != null && controller.basketState.value!.products.isNotEmpty) ...[
-                    SliverList.separated(
-                      itemCount: controller.basketState.value!.products.length,
-                      itemBuilder: (context, i) {
-                        return ProductRow(product: controller.basketState.value!.products[i]);
-                      },
-                      separatorBuilder: (context, i) {
-                        return const SizedBox(height: 8);
-                      },
+              return Stack(
+                children: [
+                  if (controller.basketState.value != null && controller.basketState.value!.products.isEmpty) ...[
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("${"empty_basket".tr}\n", style: TextStyle(color: Colors.blue.shade300, fontStyle: FontStyle.italic)),
+                        Lottie.asset('assets/empty_basket.json', width: MediaQuery.of(context).size.width, height: 180, reverse: true, frameRate: const FrameRate(60)),
+                      ],
                     )
-                  ] else if (controller.basketState.value != null) ...[
-                      SliverToBoxAdapter(child: Lottie.asset('assets/empty_basket.json', width: 180, height: 180, reverse: true, frameRate: const FrameRate(60))),
-                  ]
+                  ],
+                  CustomScrollView(
+                    slivers: [
+                      if (controller.basketState is MyErrorState) ...[
+                        SliverToBoxAdapter(child: ErrorView(state: controller.basketState as MyErrorState)),
+                      ],
+                      if (controller.basketState.value != null) ...[
+                        SliverList.separated(
+                          itemCount: controller.basketState.value!.products.length,
+                          itemBuilder: (context, i) {
+                            return ProductRow(product: controller.basketState.value!.products[i]);
+                          },
+                          separatorBuilder: (context, i) {
+                            return const SizedBox(height: 8);
+                          },
+                        )
+                      ]
+                    ],
+                  ),
                 ],
               );
             }))
