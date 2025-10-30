@@ -54,10 +54,9 @@ class _BasketPageState extends State<BasketPage> {
                 children: [
                   if (controller.basketState.value != null && controller.basketState.value!.products.isEmpty) ...[
                     Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("${"empty_basket".tr}\n", style: TextStyle(color: Colors.blue.shade300, fontStyle: FontStyle.italic)),
-                        Lottie.asset('assets/empty_basket.json', width: MediaQuery.of(context).size.width, height: 180, reverse: true, frameRate: const FrameRate(60)),
+                        Text("\n\n\n${"empty_basket".tr}\n", style: TextStyle(color: Colors.blue.shade200, fontStyle: FontStyle.italic)),
+                        Lottie.asset('assets/empty_basket.json', width: MediaQuery.of(context).size.width, height: 180, reverse: true, frameRate: FrameRate.composition),
                       ],
                     )
                   ],

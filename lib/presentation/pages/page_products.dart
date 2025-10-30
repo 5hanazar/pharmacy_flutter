@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pharmacy/data/data_source/main_api.dart';
 import 'package:pharmacy/data/repository.dart';
 import 'package:pharmacy/presentation/views/card_product.dart';
@@ -161,7 +162,18 @@ class _ProductsPageState extends State<ProductsPage> {
             showNoMoreItemsIndicatorAsGridChild: false,
             pagingController: _pagingController,
             builderDelegate: PagedChildBuilderDelegate<ProductDto>(
-              noItemsFoundIndicatorBuilder: (_) => Center(child: Text(_searchTerm == "" ? "Type to search" : "not_found".tr, style: const TextStyle(fontSize: 16))),
+              noItemsFoundIndicatorBuilder: (_) {
+                if (_searchTerm == "") {
+                  return Column(
+                    children: [
+                      Text("\n\n${"search_text".tr}", style: TextStyle(color: Colors.blue.shade200, fontStyle: FontStyle.italic)),
+                      Lottie.asset('assets/start_search.json', width: 180, height: 180, repeat: false, frameRate: const FrameRate(60)),
+                    ],
+                  );
+                } else {
+                  return Center(child: Text("not_found".tr, style: const TextStyle(fontSize: 16)));
+                }
+              },
               firstPageErrorIndicatorBuilder: (_) => Status(msg: _pagingController.error.toString(), onRefresh: () => _pagingController.refresh()),
               newPageErrorIndicatorBuilder: (_) => Status(msg: _pagingController.error.toString(), onRefresh: () => _pagingController.retryLastFailedRequest()),
               newPageProgressIndicatorBuilder: (_) => Container(alignment: Alignment.center, height: 100, child: const CircularProgressIndicator()),
