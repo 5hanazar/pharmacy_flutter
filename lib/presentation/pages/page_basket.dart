@@ -66,7 +66,7 @@ class _BasketPageState extends State<BasketPage> {
                       },
                     )
                   ] else if (controller.basketState.value != null) ...[
-                      SliverToBoxAdapter(child: Lottie.asset('assets/empty_box.json')),
+                      SliverToBoxAdapter(child: Lottie.asset('assets/empty_basket.json', width: 180, height: 180, reverse: true, frameRate: const FrameRate(60))),
                   ]
                 ],
               );
