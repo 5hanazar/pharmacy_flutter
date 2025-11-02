@@ -56,7 +56,7 @@ class _ProductCardState extends State<ProductCard> {
                       height: (MediaQuery.of(context).size.width / 2) - 24),
                 ),
                 onTap: () {
-                  Get.to(() => ProductPage(id: widget.product.id), preventDuplicates: false);
+                  Get.to(() => ProductPage(id: widget.product.id), preventDuplicates: false, transition: Transition.upToDown, duration: const Duration(milliseconds: 400));
                 }),
             Expanded(child: Padding(padding: const EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 0), child: Text(widget.product.name, maxLines: 3, overflow: TextOverflow.ellipsis, style: const TextStyle(height: 1.2)))),
             Padding(
@@ -70,7 +70,6 @@ class _ProductCardState extends State<ProductCard> {
             Stack(
               alignment: Alignment.center,
               children: [
-                ...pluses,
                 GetBuilder<BasketController>(builder: (controller) {
                   final v = controller.basketState.value?.products.firstWhereOrNull((element) => element.id == widget.product.id)?.inBasket ?? 0;
                   return v > 0
@@ -137,6 +136,7 @@ class _ProductCardState extends State<ProductCard> {
                         child: Text("add_to_basket".tr)),
                   );
                 }),
+                ...pluses,
               ],
             )
           ]),

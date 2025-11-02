@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                         child: _Title(
                           title: "all_pharmacies".tr,
                           onMoreClick: () {
-                            Get.to(() => const PharmaciesPage(), preventDuplicates: false);
+                            Get.to(() => const PharmaciesPage(), preventDuplicates: true);
                           },
                         ),
                       ),
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                       SliverToBoxAdapter(
                         child: _Title(
                           title: e.title,
-                          onMoreClick: () { Get.to(() => ProductsPage(groupCode: e.code), preventDuplicates: false); },
+                          onMoreClick: () { Get.to(() => ProductsPage(groupCode: e.code), preventDuplicates: true); },
                         ),
                       ),
                       SliverToBoxAdapter(

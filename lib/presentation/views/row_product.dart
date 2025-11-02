@@ -35,7 +35,7 @@ class _ProductRowState extends State<ProductRow> {
                       width: 124, height: 124),
                 ),
                 onTap: () {
-                  Get.to(() => ProductPage(id: widget.product.id), preventDuplicates: false);
+                  Get.to(() => ProductPage(id: widget.product.id), preventDuplicates: false, transition: Transition.upToDown, duration: const Duration(milliseconds: 400));
                 }),
             Expanded(child: Padding(
               padding: const EdgeInsets.all(12),

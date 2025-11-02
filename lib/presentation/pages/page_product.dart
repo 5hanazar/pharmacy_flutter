@@ -26,6 +26,7 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   Future<ProductAndSimilarDto?> refreshPage() async {
+    await Future.delayed(const Duration(milliseconds: 400));
     try {
       return await _repo.getProductById(widget.id);
     } on Exception catch (error, _) {

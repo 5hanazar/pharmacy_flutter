@@ -40,7 +40,7 @@ class _BasketPageState extends State<BasketPage> {
           ),
           IconButton(
             onPressed: () {
-              Get.to(() => const CheckoutPage(), preventDuplicates: false);
+              Get.to(() => const CheckoutPage(), preventDuplicates: true);
             },
             icon: const Icon(Icons.check),
           )
