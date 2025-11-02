@@ -281,10 +281,12 @@ class HomeDto {
 
 class BasketDto {
   final num total;
+  final num amount;
   final List<ProductDto> products;
 
   BasketDto({
     required this.total,
+    required this.amount,
     required this.products,
   });
 
@@ -297,6 +299,7 @@ class BasketDto {
     }
     return BasketDto(
       total: json['total'],
+      amount: json['amount'],
       products: products,
     );
   }

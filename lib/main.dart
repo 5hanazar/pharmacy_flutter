@@ -7,6 +7,7 @@ import 'package:pharmacy/data/data_source/main_api.dart';
 import 'package:pharmacy/data/repository.dart';
 import 'package:pharmacy/presentation/pages/page_basket.dart';
 import 'package:pharmacy/presentation/pages/page_home.dart';
+import 'package:pharmacy/presentation/pages/page_order_requests.dart';
 import 'package:pharmacy/resources/controller_basket.dart';
 import 'package:pharmacy/resources/controller_home.dart';
 import 'package:pharmacy/resources/controller_order_requests.dart';
@@ -66,7 +67,7 @@ class MyBottomNav extends StatelessWidget {
   const MyBottomNav({super.key});
 
   List<Widget> _buildScreens() {
-    return [const HomePage(), const BasketPage()];
+    return [const HomePage(), const BasketPage(), const OrderRequestsPage()];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -81,7 +82,7 @@ class MyBottomNav extends StatelessWidget {
         icon: GetBuilder<BasketController>(builder: (controller) {
           return Badge(
             label: Text(
-              (controller.basketState.value?.total ?? 0).toString(),
+              (controller.basketState.value?.amount ?? 0).toString(),
               style: const TextStyle(color: Colors.white, fontSize: 10),
             ),
             isLabelVisible: (controller.basketState.value?.total ?? 0) > 0,
@@ -91,7 +92,22 @@ class MyBottomNav extends StatelessWidget {
         title: ("basket".tr),
         activeColorPrimary: Colors.blue.shade400,
         inactiveColorPrimary: CupertinoColors.systemGrey,
-      )
+      ),
+      PersistentBottomNavBarItem(
+        icon: GetBuilder<OrderRequestsController>(builder: (controller) {
+          return Badge(
+            label: Text(
+              (controller.orderRequestsState.value?.count ?? 0).toString(),
+              style: const TextStyle(color: Colors.white, fontSize: 10),
+            ),
+            isLabelVisible: (controller.orderRequestsState.value?.count ?? 0) > 0,
+            child: const Icon(Icons.receipt),
+          );
+        }),
+        title: ("orders".tr),
+        activeColorPrimary: Colors.blue.shade400,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
     ];
   }
 

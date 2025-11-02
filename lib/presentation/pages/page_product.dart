@@ -107,7 +107,7 @@ class _ProductPageState extends State<ProductPage> {
                         margin: const EdgeInsets.only(top: 16, bottom: 28),
                         child: Row(children: [
                           Text("~${snapshot.data!.product.price} ", style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.blue)),
-                          const Text("TMT", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blue)),
+                          const Text("TMT", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.blue)),
                           const Spacer(),
                           BarCodeImage(
                             params: Code128BarCodeParams(

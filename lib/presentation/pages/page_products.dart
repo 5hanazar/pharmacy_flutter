@@ -136,7 +136,7 @@ class _ProductsPageState extends State<ProductsPage> {
                     _searchTerm = query;
                     _pagingController.refresh();
                   },
-                  autofocus: false,
+                  autofocus: _searchTerm.isEmpty,
                   decoration: InputDecoration(
                       contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
                       suffixIcon: const Icon(Icons.search),

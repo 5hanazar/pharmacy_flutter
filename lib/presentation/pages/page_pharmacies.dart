@@ -24,10 +24,10 @@ class _PharmaciesPageState extends State<PharmaciesPage> {
     super.initState();
   }
 
+  int rowCount = 0;
   String _searchTerm = "";
   final String _sortBy = "";
-  final PagingController<int, PharmacyDtoView> _pagingController =
-      PagingController(firstPageKey: 0);
+  final PagingController<int, PharmacyDtoView> _pagingController = PagingController(firstPageKey: 0);
 
   Future<void> _fetchPage(int pageKey) async {
     try {
@@ -40,6 +40,7 @@ class _PharmaciesPageState extends State<PharmaciesPage> {
         final nextPageKey = pageKey + 1;
         _pagingController.appendPage(newItems, nextPageKey);
       }
+      setState(() { rowCount = result.count; });
     } on Exception catch (error, _) {
       _pagingController.error = error;
     }
@@ -55,6 +56,9 @@ class _PharmaciesPageState extends State<PharmaciesPage> {
             pinned: true,
             titleSpacing: 8,
             title: Text("all_pharmacies".tr, style: const TextStyle(fontWeight: FontWeight.bold)),
+            actions: [
+              Container(margin: const EdgeInsets.only(right: 16), child: Text("$rowCount ${"pharmacy_count".tr}", style: const TextStyle(fontSize: 16)))
+            ],
             bottom: AppBar(
               automaticallyImplyLeading: false,
               titleSpacing: 4,
