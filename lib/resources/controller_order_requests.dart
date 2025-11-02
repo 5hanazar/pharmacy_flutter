@@ -7,6 +7,12 @@ class OrderRequestsController extends GetxController {
   final RepositoryImpl _repo = Get.find();
   MyState<PagedOrderRequestDto> orderRequestsState = MyState.loading(null);
 
+  @override
+  void onInit() {
+    super.onInit();
+    refreshOrderRequests();
+  }
+
   Future<void> refreshOrderRequests() async {
     orderRequestsState = MyState.loading(orderRequestsState.value);
     update();

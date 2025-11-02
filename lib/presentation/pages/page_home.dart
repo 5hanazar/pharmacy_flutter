@@ -24,11 +24,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    refreshList();
-  }
-
-  Future<void> refreshList() async {
-    await controller.refreshHome();
   }
 
   void _showLanguageDialog(BuildContext context) {
@@ -40,7 +35,7 @@ class _HomePageState extends State<HomePage> {
           onConfirm: (value) async {
             await Get.updateLocale(value);
             await controller.setLanguage(value.languageCode == "ru" ? 1 : 2);
-            refreshList();
+            controller.refreshHome();
           },
         );
       },
@@ -70,7 +65,7 @@ class _HomePageState extends State<HomePage> {
             ]),
         body: RefreshIndicator(
             key: _refreshIndicatorKey,
-            onRefresh: refreshList,
+            onRefresh: () => controller.refreshHome(),
             backgroundColor: Colors.white,
             child: GetBuilder<HomeController>(builder: (controller) {
               return CustomScrollView(

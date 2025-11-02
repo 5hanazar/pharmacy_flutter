@@ -20,11 +20,6 @@ class _OrderRequestsPageState extends State<OrderRequestsPage> {
   @override
   void initState() {
     super.initState();
-    refreshList();
-  }
-
-  Future<void> refreshList() async {
-    await controller.refreshOrderRequests();
   }
 
   @override
@@ -33,7 +28,7 @@ class _OrderRequestsPageState extends State<OrderRequestsPage> {
       appBar: AppBar(title: Text("orders".tr, style: const TextStyle(fontWeight: FontWeight.bold))),
       body: RefreshIndicator(
           key: _refreshIndicatorKey,
-          onRefresh: refreshList,
+          onRefresh: () => controller.refreshOrderRequests(),
           backgroundColor: Colors.white,
           child: GetBuilder<OrderRequestsController>(builder: (controller) {
             return Stack(
