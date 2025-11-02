@@ -67,7 +67,7 @@ class _BasketPageState extends State<BasketPage> {
                         SliverToBoxAdapter(child: Container(
                           margin: const EdgeInsets.only(bottom: 6),
                           child: Card(child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                             child: Row(children: [
                               Expanded(child: Container(margin: const EdgeInsets.only(right: 16), child: Text("basket_text".tr, style: TextStyle(color: Colors.blue.shade700, height: 1.2)))),
                               ElevatedButton(

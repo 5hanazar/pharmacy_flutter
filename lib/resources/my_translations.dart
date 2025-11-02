@@ -69,7 +69,7 @@ class MyTranslations extends Translations {
       'yes': 'Hawa',
       'no': 'Ýok',
       'all_products': 'Ähli dermanlar',
-      'approximate_total': 'Takmynan jemi ',
+      'approximate_total': 'Takmynan jemi',
       'phone': 'Telefon',
       'address': 'Salgy',
       'description': 'Bellik',
