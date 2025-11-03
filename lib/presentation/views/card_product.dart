@@ -38,9 +38,7 @@ class _ProductCardState extends State<ProductCard> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        height: (MediaQuery.of(context).size.width / 2) + 160,
-        child: Card(
+    return Card(
           child: Column(children: [
             GestureDetector(
                 child: Padding(
@@ -140,6 +138,6 @@ class _ProductCardState extends State<ProductCard> {
               ],
             )
           ]),
-        ));
+        );
   }
 }

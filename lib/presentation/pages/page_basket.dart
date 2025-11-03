@@ -25,6 +25,7 @@ class _BasketPageState extends State<BasketPage> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<BasketController>(builder: (controller) {
+      final double textScaleFactor = MediaQuery.of(context).textScaler.scale(1);
       return Scaffold(
           appBar: AppBar(title: Text("basket".tr, style: const TextStyle(fontWeight: FontWeight.bold)), actions: [
             Container(
@@ -43,7 +44,7 @@ class _BasketPageState extends State<BasketPage> {
                 ],
               ),
             ),
-          ]),
+          ], toolbarHeight: 56 * textScaleFactor),
           body: RefreshIndicator(
               key: _refreshIndicatorKey,
               onRefresh: () => controller.refreshBasket(),

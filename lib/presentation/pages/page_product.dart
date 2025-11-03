@@ -37,6 +37,7 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double textScaleFactor = MediaQuery.of(context).textScaler.scale(1);
     return Scaffold(
       body: FutureBuilder<ProductAndSimilarDto?>(
           future: refreshPage(),
@@ -176,7 +177,7 @@ class _ProductPageState extends State<ProductPage> {
               SliverGrid(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisExtent: (MediaQuery.of(context).size.width / 2) + 160,
+                  mainAxisExtent: (MediaQuery.of(context).size.width / 2) + (160 * textScaleFactor),
                 ),
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {

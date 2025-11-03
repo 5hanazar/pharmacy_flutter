@@ -110,6 +110,7 @@ class _ProductsPageState extends State<ProductsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final double textScaleFactor = MediaQuery.of(context).textScaler.scale(1);
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -181,8 +182,7 @@ class _ProductsPageState extends State<ProductsPage> {
             ),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              mainAxisExtent:
-              (MediaQuery.of(context).size.width / 2) + 160,
+              mainAxisExtent: (MediaQuery.of(context).size.width / 2) + (160 * textScaleFactor),
             ),
           ),
         ],

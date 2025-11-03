@@ -209,6 +209,7 @@ class _ProductsHorizontal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double textScaleFactor = MediaQuery.of(context).textScaler.scale(1);
     return list.isEmpty
         ? Container(
             height: 100,
@@ -216,7 +217,7 @@ class _ProductsHorizontal extends StatelessWidget {
             child: const Text("Нет данных"),
           )
         : SizedBox(
-            height: (MediaQuery.of(context).size.width / 2) + 160,
+            height: (MediaQuery.of(context).size.width / 2) + (160 * textScaleFactor),
             child: PageView.builder(
                 padEnds: false,
                 controller: PageController(viewportFraction: 0.5),
@@ -234,8 +235,9 @@ class _PharmaciesHorizontal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double textScaleFactor = MediaQuery.of(context).textScaler.scale(1);
     return SizedBox(
-      height: 100,
+      height: 100 * textScaleFactor,
       child: PageView.builder(
           padEnds: false,
           controller: PageController(viewportFraction: 0.7),
