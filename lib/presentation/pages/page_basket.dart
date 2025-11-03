@@ -36,7 +36,7 @@ class _BasketPageState extends State<BasketPage> {
                   Text("${"approximate_total".tr}:", style: const TextStyle(fontSize: 12)),
                   Row(
                     children: [
-                      Text("~${controller.basketState.value!.total} ", style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold, height: 1.2)),
+                      Text("~${controller.basketState.value?.total ?? 0} ", style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold, height: 1.2)),
                       const Text("TMT", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     ],
                   ),
@@ -54,7 +54,7 @@ class _BasketPageState extends State<BasketPage> {
                     Column(
                       children: [
                         Text("\n\n\n${"empty_basket".tr}\n", style: TextStyle(color: Colors.blue.shade200, fontStyle: FontStyle.italic)),
-                        Lottie.asset('assets/empty_basket.json', width: MediaQuery.of(context).size.width, height: 180, reverse: true, frameRate: FrameRate.composition),
+                        Lottie.asset('assets/lottie_basket.json', width: MediaQuery.of(context).size.width, height: 180, reverse: true, frameRate: FrameRate.composition),
                       ],
                     )
                   ],

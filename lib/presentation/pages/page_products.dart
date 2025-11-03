@@ -166,8 +166,8 @@ class _ProductsPageState extends State<ProductsPage> {
                 if (_searchTerm == "") {
                   return Column(
                     children: [
-                      Text("\n\n${"search_text".tr}", style: TextStyle(color: Colors.blue.shade200, fontStyle: FontStyle.italic)),
-                      Lottie.asset('assets/start_search.json', width: 180, height: 180, repeat: false, frameRate: const FrameRate(60)),
+                      Text("\n\n${"search_text".tr}\n", style: TextStyle(color: Colors.blue.shade200, fontStyle: FontStyle.italic)),
+                      Lottie.asset('assets/lottie_search.json', width: 180, height: 180, repeat: false, frameRate: const FrameRate(60)),
                     ],
                   );
                 } else {

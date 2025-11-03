@@ -57,7 +57,7 @@ class _PharmaciesPageState extends State<PharmaciesPage> {
             titleSpacing: 8,
             title: Text("all_pharmacies".tr, style: const TextStyle(fontWeight: FontWeight.bold)),
             actions: [
-              Container(margin: const EdgeInsets.only(right: 16), child: Text("$rowCount ${"pharmacy_count".tr}", style: const TextStyle(fontSize: 16)))
+              Container(margin: const EdgeInsets.only(right: 16), child: Text(rowCount > 0 ? "$rowCount ${"pharmacy_count".tr}" : "", style: const TextStyle(fontSize: 16)))
             ],
             bottom: AppBar(
               automaticallyImplyLeading: false,

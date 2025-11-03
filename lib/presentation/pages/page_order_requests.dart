@@ -37,7 +37,7 @@ class _OrderRequestsPageState extends State<OrderRequestsPage> {
                   Column(
                     children: [
                       Text("\n\n\n${"no_orders".tr}\n", style: TextStyle(color: Colors.blue.shade200, fontStyle: FontStyle.italic)),
-                      Lottie.asset('assets/empty_orders.json', width: MediaQuery.of(context).size.width, height: 180, repeat: false, frameRate: FrameRate.composition),
+                      Lottie.asset('assets/lottie_orders.json', width: MediaQuery.of(context).size.width, height: 180, repeat: false, frameRate: FrameRate.composition),
                     ],
                   )
                 ],
