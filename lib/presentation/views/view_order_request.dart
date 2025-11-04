@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy/data/data_source/main_api.dart';
+import 'package:pharmacy/presentation/pages/page_order_responses.dart';
 import 'package:pharmacy/resources/controller_order_requests.dart';
 
 class OrderRequestView extends StatelessWidget {
@@ -18,7 +19,7 @@ class OrderRequestView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Row(children: [Container(margin: const EdgeInsets.only(right: 6, bottom: 0), child: const Icon(Icons.phone, size: 18, color: Colors.blueGrey)), Text(order.phone, style: const TextStyle(fontWeight: FontWeight.bold))]),
-            Row(children: [Container(margin: const EdgeInsets.only(right: 6, bottom: 0), child: const Icon(Icons.pin_drop, size: 18, color: Colors.blueGrey)), Text(order.address)]),
+            Row(children: [Container(margin: const EdgeInsets.only(right: 6, bottom: 0), child: const Icon(Icons.location_on, size: 18, color: Colors.blueGrey)), Text(order.address)]),
             if (order.description.isNotEmpty) ...[
               Row(children: [Container(margin: const EdgeInsets.only(right: 6, bottom: 0), child: const Icon(Icons.edit, size: 18, color: Colors.blueGrey)), Text(order.description)]),
             ],
@@ -54,25 +55,44 @@ class OrderRequestView extends StatelessWidget {
           ],
         ),
       ),
-      Align(alignment: Alignment.topRight, child: IconButton(onPressed: () {
-        showDialog<String>(
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-            title: Text('cancel_order'.tr),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                style: TextButton.styleFrom(foregroundColor: Colors.grey),
-                child: Text('no'.tr),
-              ),
-              TextButton(onPressed: () async {
-                await _controller.deleteOrderRequest(order.id);
-                if (context.mounted) Navigator.pop(context);
-              }, child: Text('yes'.tr)),
-            ],
+      Align(alignment: Alignment.topRight, child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (order.responses.isNotEmpty) Badge(
+            offset: const Offset(0, 0),
+            label: Text(
+              order.responses.length.toString(),
+              style: const TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.red,
+            child: IconButton(
+              icon: const Icon(Icons.message_outlined),
+              onPressed: () {
+                Get.to(() => OrderResponsesPage(orderRequest: order), preventDuplicates: true, transition: Transition.upToDown, duration: const Duration(milliseconds: 400));
+              },
+            ),
           ),
-        );
-      }, icon: Icon(Icons.close, color: Colors.grey.shade400)))
+          IconButton(onPressed: () {
+            showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                title: Text('cancel_order'.tr),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    style: TextButton.styleFrom(foregroundColor: Colors.grey),
+                    child: Text('no'.tr),
+                  ),
+                  TextButton(onPressed: () async {
+                    await _controller.deleteOrderRequest(order.id);
+                    if (context.mounted) Navigator.pop(context);
+                  }, child: Text('yes'.tr)),
+                ],
+              ),
+            );
+          }, icon: Icon(Icons.close, color: Colors.grey.shade400)),
+        ],
+      ))
     ]));
   }
 }

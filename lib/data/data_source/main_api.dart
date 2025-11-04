@@ -379,6 +379,7 @@ class OrderRequestDtoView {
   final List<OrderRequestLineDtoView> lines;
   final num total;
   final String createdDate;
+  final List<OrderResponseDtoView> responses;
 
   OrderRequestDtoView({
     required this.id,
@@ -388,6 +389,7 @@ class OrderRequestDtoView {
     required this.lines,
     required this.total,
     required this.createdDate,
+    required this.responses,
   });
 
   factory OrderRequestDtoView.fromJson(Map<String, dynamic> json) {
@@ -398,10 +400,90 @@ class OrderRequestDtoView {
       });
     }
 
+    var responses = <OrderResponseDtoView>[];
+    if (json['responses'] != null) {
+      json['responses'].forEach((v) {
+        responses.add(OrderResponseDtoView.fromJson(v));
+      });
+    }
+
     return OrderRequestDtoView(
       id: json['id'],
       phone: json['phone'],
       address: json['address'],
+      description: json['description'],
+      lines: lines,
+      total: json['total'],
+      createdDate: json['createdDate'],
+      responses: responses
+    );
+  }
+}
+
+class OrderResponseLineDtoView {
+  final String barcode;
+  final String name;
+  final String description;
+  final num price;
+  final num quantity;
+
+  OrderResponseLineDtoView({
+    required this.barcode,
+    required this.name,
+    required this.description,
+    required this.price,
+    required this.quantity,
+  });
+
+  factory OrderResponseLineDtoView.fromJson(Map<String, dynamic> json) {
+    return OrderResponseLineDtoView(
+      barcode: json['barcode'],
+      name: json['name'],
+      description: json['description'],
+      price: json['price'],
+      quantity: json['quantity'],
+    );
+  }
+}
+
+class OrderResponseDtoView {
+  final int id;
+  final int pharmacyId;
+  final String pharmacyName;
+  final String pharmacyPhone;
+  final String pharmacyAddress;
+  final String description;
+  final List<OrderResponseLineDtoView> lines;
+  final num total;
+  final String createdDate;
+
+  OrderResponseDtoView({
+    required this.id,
+    required this.pharmacyId,
+    required this.pharmacyName,
+    required this.pharmacyPhone,
+    required this.pharmacyAddress,
+    required this.description,
+    required this.lines,
+    required this.total,
+    required this.createdDate,
+  });
+
+  factory OrderResponseDtoView.fromJson(Map<String, dynamic> json) {
+    var lines = <OrderResponseLineDtoView>[];
+    if (json['lines'] != null) {
+      // Loop through the list of line items in the JSON and parse each one
+      for (var v in json['lines']) {
+        lines.add(OrderResponseLineDtoView.fromJson(v));
+      }
+    }
+
+    return OrderResponseDtoView(
+      id: json['id'],
+      pharmacyId: json['pharmacyId'],
+      pharmacyName: json['pharmacyName'],
+      pharmacyPhone: json['pharmacyPhone'],
+      pharmacyAddress: json['pharmacyAddress'],
       description: json['description'],
       lines: lines,
       total: json['total'],

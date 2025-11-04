@@ -51,6 +51,7 @@ class MyTranslations extends Translations {
       'basket_text': 'Отправьте ваш заказ во все аптеки города одним нажатием.',
       'pharmacy_count': 'аптек',
       'successfully_sent': 'Ваш заказ отправлен в аптеки.',
+      'responses': 'Ответы от аптек',
     },
     'tm_TM': {
       'products': 'Harytlar',
@@ -100,6 +101,7 @@ class MyTranslations extends Translations {
       'basket_text': 'Sargydyňyzy bir düwme bilen şäheriň ähli dermanhanasyna iberiň.',
       'pharmacy_count': 'sany',
       'successfully_sent': 'Sargydyňyz dermanhalara ugradyldy.',
+      'responses': 'Apteklaryň jogaby',
     }
   };
 }
