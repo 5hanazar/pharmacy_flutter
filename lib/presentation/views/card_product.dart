@@ -8,8 +8,9 @@ import 'package:pharmacy/resources/controller_basket.dart';
 
 class ProductCard extends StatefulWidget {
   final ProductDto product;
+  final int columnProducts;
 
-  const ProductCard({super.key, required this.product});
+  const ProductCard({super.key, required this.product, required this.columnProducts});
 
   @override
   State<ProductCard> createState() => _ProductCardState();
@@ -51,7 +52,7 @@ class _ProductCardState extends State<ProductCard> {
                       errorWidget: (context, url, error) => Image.asset('assets/no_image.webp'),
                       cacheKey: widget.product.images[0],
                       width: double.infinity,
-                      height: (MediaQuery.of(context).size.width / 2) - 24),
+                      height: (MediaQuery.of(context).size.width / widget.columnProducts) - 24),
                 ),
                 onTap: () {
                   Get.to(() => ProductPage(id: widget.product.id), preventDuplicates: false, transition: Transition.upToDown, duration: const Duration(milliseconds: 400));

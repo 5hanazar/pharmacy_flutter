@@ -112,81 +112,89 @@ class _ProductsPageState extends State<ProductsPage> {
   Widget build(BuildContext context) {
     final double textScaleFactor = MediaQuery.of(context).textScaler.scale(1);
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            floating: true,
-            pinned: true,
-            titleSpacing: 8,
-            title: Text(_title, style: const TextStyle(fontWeight: FontWeight.bold)),
-            actions: [
-              Container(margin: const EdgeInsets.symmetric(horizontal: 16), child: Text(_sortLabel))
-            ],
-            bottom: AppBar(
-              automaticallyImplyLeading: false,
-              titleSpacing: 4,
-              actions: [
-                Container(margin: const EdgeInsets.only(right: 8), child: IconButton(onPressed: () {
-                  _showListDialog(context);
-                }, icon: const Icon(Icons.sort)))
-              ],
-              title: Container(
-                margin: const EdgeInsets.only(left: 10),
-                child: TextField(
-                  onSubmitted: (query) {
-                    _searchTerm = query;
-                    _pagingController.refresh();
-                  },
-                  autofocus: widget.groupCode == "" && _searchTerm.isEmpty,
-                  decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-                      suffixIcon: const Icon(Icons.search),
-                      hintText: "search".tr,
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(22)),
-                      enabledBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(22)),
-                        borderSide: BorderSide(width: 0.5, color: Colors.blue),
-                      ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(22)),
-                        borderSide: BorderSide(width: 1.5, color: Colors.blue),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white),
+      body: LayoutBuilder(builder: (context, constraints) {
+        int columnProducts = 2;
+        if (constraints.maxWidth >= 600) {
+          columnProducts = 3;
+        }
+        return CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              floating: true,
+              pinned: true,
+              titleSpacing: 8,
+              title: Text(_title, style: const TextStyle(fontWeight: FontWeight.bold)),
+              actions: [Container(margin: const EdgeInsets.symmetric(horizontal: 16), child: Text(_sortLabel))],
+              bottom: AppBar(
+                automaticallyImplyLeading: false,
+                titleSpacing: 4,
+                actions: [
+                  Container(
+                      margin: const EdgeInsets.only(right: 8),
+                      child: IconButton(
+                          onPressed: () {
+                            _showListDialog(context);
+                          },
+                          icon: const Icon(Icons.sort)))
+                ],
+                title: Container(
+                  margin: const EdgeInsets.only(left: 10),
+                  child: TextField(
+                    onSubmitted: (query) {
+                      _searchTerm = query;
+                      _pagingController.refresh();
+                    },
+                    autofocus: widget.groupCode == "" && _searchTerm.isEmpty,
+                    decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                        suffixIcon: const Icon(Icons.search),
+                        hintText: "search".tr,
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(22)),
+                        enabledBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(22)),
+                          borderSide: BorderSide(width: 0.5, color: Colors.blue),
+                        ),
+                        focusedBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(22)),
+                          borderSide: BorderSide(width: 1.5, color: Colors.blue),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white),
+                  ),
                 ),
               ),
             ),
-          ),
-          PagedSliverGrid<int, ProductDto>(
-            showNewPageProgressIndicatorAsGridChild: false,
-            showNewPageErrorIndicatorAsGridChild: false,
-            showNoMoreItemsIndicatorAsGridChild: false,
-            pagingController: _pagingController,
-            builderDelegate: PagedChildBuilderDelegate<ProductDto>(
-              noItemsFoundIndicatorBuilder: (_) {
-                if (_searchTerm == "") {
-                  return Column(
-                    children: [
-                      Text("\n\n${"search_text".tr}\n", style: TextStyle(color: Colors.blue.shade200, fontStyle: FontStyle.italic)),
-                      Lottie.asset('assets/lottie_search.json', width: 180, height: 180, repeat: false, frameRate: const FrameRate(60)),
-                    ],
-                  );
-                } else {
-                  return Center(child: Text("not_found".tr, style: const TextStyle(fontSize: 16)));
-                }
-              },
-              firstPageErrorIndicatorBuilder: (_) => Status(msg: _pagingController.error.toString(), onRefresh: () => _pagingController.refresh()),
-              newPageErrorIndicatorBuilder: (_) => Status(msg: _pagingController.error.toString(), onRefresh: () => _pagingController.retryLastFailedRequest()),
-              newPageProgressIndicatorBuilder: (_) => Container(alignment: Alignment.center, height: 100, child: const CircularProgressIndicator()),
-              itemBuilder: (context, item, index) => ProductCard(product: item),
+            PagedSliverGrid<int, ProductDto>(
+              showNewPageProgressIndicatorAsGridChild: false,
+              showNewPageErrorIndicatorAsGridChild: false,
+              showNoMoreItemsIndicatorAsGridChild: false,
+              pagingController: _pagingController,
+              builderDelegate: PagedChildBuilderDelegate<ProductDto>(
+                noItemsFoundIndicatorBuilder: (_) {
+                  if (_searchTerm == "") {
+                    return Column(
+                      children: [
+                        Text("\n\n${"search_text".tr}\n", style: TextStyle(color: Colors.blue.shade200, fontStyle: FontStyle.italic)),
+                        Lottie.asset('assets/lottie_search.json', width: 180, height: 180, repeat: false, frameRate: const FrameRate(60)),
+                      ],
+                    );
+                  } else {
+                    return Center(child: Text("not_found".tr, style: const TextStyle(fontSize: 16)));
+                  }
+                },
+                firstPageErrorIndicatorBuilder: (_) => Status(msg: _pagingController.error.toString(), onRefresh: () => _pagingController.refresh()),
+                newPageErrorIndicatorBuilder: (_) => Status(msg: _pagingController.error.toString(), onRefresh: () => _pagingController.retryLastFailedRequest()),
+                newPageProgressIndicatorBuilder: (_) => Container(alignment: Alignment.center, height: 100, child: const CircularProgressIndicator()),
+                itemBuilder: (context, item, index) => ProductCard(product: item, columnProducts: columnProducts),
+              ),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: columnProducts,
+                mainAxisExtent: (MediaQuery.of(context).size.width / columnProducts) + (160 * textScaleFactor),
+              ),
             ),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisExtent: (MediaQuery.of(context).size.width / 2) + (160 * textScaleFactor),
-            ),
-          ),
-        ],
-      ),
+          ],
+        );
+      }),
     );
   }
 }

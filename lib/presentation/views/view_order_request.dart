@@ -31,13 +31,13 @@ class OrderRequestView extends StatelessWidget {
                     dividerThickness: 0.1,
                     horizontalMargin: 8,
                     columnSpacing: 16,
-                    dataRowMinHeight: 30,
-                    dataRowMaxHeight: 30,
-                    headingRowHeight: 30,
+                    dataRowMinHeight: 32,
+                    dataRowMaxHeight: 32,
+                    headingRowHeight: 32,
                     columns: <DataColumn>[
-                      DataColumn(label: Text('amount'.tr)),
-                      DataColumn(label: Text('product'.tr)),
-                      DataColumn(label: Text('price'.tr)),
+                      DataColumn(label: Text('amount'.tr, style: const TextStyle(color: Colors.black38))),
+                      DataColumn(label: Text('product'.tr, style: const TextStyle(color: Colors.black38))),
+                      DataColumn(label: Text('price'.tr, style: const TextStyle(color: Colors.black38))),
                     ],
                     rows: order.lines.map((line) {
                       return DataRow(

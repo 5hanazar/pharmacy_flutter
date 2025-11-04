@@ -68,50 +68,57 @@ class _HomePageState extends State<HomePage> {
             onRefresh: () => controller.refreshHome(),
             backgroundColor: Colors.white,
             child: GetBuilder<HomeController>(builder: (controller) {
-              return CustomScrollView(
-                slivers: [
-                  if (controller.homeState is MyErrorState) ...[
-                    SliverToBoxAdapter(child: ErrorView(state: controller.homeState as MyErrorState)),
-                  ],
-                  if (controller.homeState.value != null) ...[
-                    const SliverToBoxAdapter(child: _Caution()),
-                    SliverToBoxAdapter(child: _CategoriesHorizontal(list: controller.homeState.value!.categories, onClick: (code) {
-                      Get.to(() => ProductsPage(groupCode: code), preventDuplicates: false);
-                    })),
-
-                    if (controller.homeState.value!.pharmacies.isNotEmpty) ...[
-                      SliverToBoxAdapter(
-                        child: _Title(
-                          title: "all_pharmacies".tr,
-                          onMoreClick: () {
-                            Get.to(() => const PharmaciesPage(), preventDuplicates: true);
-                          },
-                        ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: _PharmaciesHorizontal(
-                          list: controller.homeState.value!.pharmacies,
-                          onClick: (_) {},
-                        ),
-                      )
+              return LayoutBuilder(builder: (context, constraints) {
+                int columnProducts = 2;
+                if (constraints.maxWidth >= 600) {
+                  columnProducts = 3;
+                }
+                return CustomScrollView(
+                  slivers: [
+                    if (controller.homeState is MyErrorState) ...[
+                      SliverToBoxAdapter(child: ErrorView(state: controller.homeState as MyErrorState)),
                     ],
-
-                    ...controller.homeState.value!.list.expand((e) => [
+                    if (controller.homeState.value != null) ...[
+                      const SliverToBoxAdapter(child: _Caution()),
                       SliverToBoxAdapter(
-                        child: _Title(
-                          title: e.title,
-                          onMoreClick: () { Get.to(() => ProductsPage(groupCode: e.code), preventDuplicates: true); },
+                          child: _CategoriesHorizontal(
+                              list: controller.homeState.value!.categories,
+                              columnProducts: columnProducts,
+                              onClick: (code) {
+                                Get.to(() => ProductsPage(groupCode: code), preventDuplicates: false);
+                              })),
+                      if (controller.homeState.value!.pharmacies.isNotEmpty) ...[
+                        SliverToBoxAdapter(
+                          child: _Title(
+                            title: "all_pharmacies".tr,
+                            onMoreClick: () {
+                              Get.to(() => const PharmaciesPage(), preventDuplicates: true);
+                            },
+                          ),
                         ),
-                      ),
-                      SliverToBoxAdapter(
-                        child: _ProductsHorizontal(
-                          list: e.products,
+                        SliverToBoxAdapter(
+                          child: _PharmaciesHorizontal(
+                            list: controller.homeState.value!.pharmacies,
+                            columnProducts: columnProducts,
+                            onClick: (_) {},
+                          ),
+                        )
+                      ],
+                      ...controller.homeState.value!.list.expand((e) => [
+                        SliverToBoxAdapter(
+                          child: _Title(
+                            title: e.title,
+                            onMoreClick: () {
+                              Get.to(() => ProductsPage(groupCode: e.code), preventDuplicates: true);
+                            },
+                          ),
                         ),
-                      ),
-                    ]),
+                        SliverToBoxAdapter(child: _ProductsHorizontal(list: e.products, columnProducts: columnProducts)),
+                      ]),
+                    ],
                   ],
-                ],
-              );
+                );
+              });
             })));
   }
 }
@@ -140,9 +147,10 @@ class _Caution extends StatelessWidget {
 
 class _CategoriesHorizontal extends StatelessWidget {
   final List<CategoryDto> list;
+  final int columnProducts;
   final Function(String code) onClick;
 
-  const _CategoriesHorizontal({required this.list, required this.onClick});
+  const _CategoriesHorizontal({required this.list, required this.columnProducts, required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +158,7 @@ class _CategoriesHorizontal extends StatelessWidget {
       height: 64,
       child: PageView.builder(
           padEnds: false,
-          controller: PageController(viewportFraction: 0.4),
+          controller: PageController(viewportFraction: 0.9 / columnProducts),
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
@@ -204,8 +212,9 @@ class _Title extends StatelessWidget {
 
 class _ProductsHorizontal extends StatelessWidget {
   final List<ProductDto> list;
+  final int columnProducts;
 
-  const _ProductsHorizontal({required this.list});
+  const _ProductsHorizontal({required this.list, required this.columnProducts});
 
   @override
   Widget build(BuildContext context) {
@@ -217,11 +226,11 @@ class _ProductsHorizontal extends StatelessWidget {
             child: const Text("Нет данных"),
           )
         : SizedBox(
-            height: (MediaQuery.of(context).size.width / 2) + (160 * textScaleFactor),
+            height: (MediaQuery.of(context).size.width / columnProducts) + (160 * textScaleFactor),
             child: PageView.builder(
                 padEnds: false,
-                controller: PageController(viewportFraction: 0.5),
-                itemBuilder: (context, index) => ProductCard(product: list[index]),
+                controller: PageController(viewportFraction: 1 / columnProducts),
+                itemBuilder: (context, index) => ProductCard(product: list[index], columnProducts: columnProducts),
                 itemCount: list.length),
           );
   }
@@ -229,9 +238,10 @@ class _ProductsHorizontal extends StatelessWidget {
 
 class _PharmaciesHorizontal extends StatelessWidget {
   final List<PharmacyDtoView> list;
+  final int columnProducts;
   final Function(String code) onClick;
 
-  const _PharmaciesHorizontal({required this.list, required this.onClick});
+  const _PharmaciesHorizontal({required this.list, required this.columnProducts, required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -240,7 +250,7 @@ class _PharmaciesHorizontal extends StatelessWidget {
       height: 100 * textScaleFactor,
       child: PageView.builder(
           padEnds: false,
-          controller: PageController(viewportFraction: 0.7),
+          controller: PageController(viewportFraction: ((0.7 + (columnProducts - 2) * 0.2) / (columnProducts - 1))),
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () {
