@@ -48,7 +48,7 @@ class _OrderRequestsPageState extends State<OrderRequestsPage> {
                     ],
                     if (controller.orderRequestsState.value != null) ...[
                       SliverList.separated(
-                        itemCount: controller.orderRequestsState.value!.count,
+                        itemCount: controller.orderRequestsState.value!.data.length,
                         itemBuilder: (context, i) {
                           return OrderRequestView(order: controller.orderRequestsState.value!.data[i]);
                         },

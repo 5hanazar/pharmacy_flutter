@@ -124,7 +124,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                   try {
                                     await controller.postCheckout(PostOrderRequestDto(clientName: "", phoneToContact: "+933${_phoneNumber.text}", address: _address.text, description: _description.text));
                                     await controller.refreshBasket();
-                                    Get.back();
+                                    Get.back(result: true);
                                   } on Exception catch (error, _) {
                                     Fluttertoast.showToast(
                                         msg: errorFormat(error.toString()),

@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        home: const MyBottomNav(),
+        home: MyBottomNav(),
         initialBinding: BindingsBuilder(() {
           Get.put(RepositoryImpl(prefs, MainApi(prefs: prefs)));
           Get.put(HomeController());
@@ -67,11 +67,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyBottomNav extends StatelessWidget {
-  const MyBottomNav({super.key});
-
-  List<Widget> _buildScreens() {
-    return [const HomePage(), const BasketPage(), const OrderRequestsPage()];
-  }
+  MyBottomNav({super.key});
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
@@ -114,17 +110,20 @@ class MyBottomNav extends StatelessWidget {
     ];
   }
 
+  final PersistentTabController _controller = PersistentTabController(initialIndex: 0);
+
   @override
   Widget build(BuildContext context) {
-    final PersistentTabController controller = PersistentTabController(initialIndex: 0);
     return PersistentTabView(
       onWillPop: (final context) async {
-        if (controller.index == 0) SystemNavigator.pop();
+        if (_controller.index == 0) SystemNavigator.pop();
         return false;
       },
       context,
-      controller: controller,
-      screens: _buildScreens(),
+      controller: _controller,
+      screens: [const HomePage(), BasketPage(navigateTab: (page) {
+        _controller.jumpToTab(2);
+      }), const OrderRequestsPage()],
       items: _navBarsItems(),
       navBarStyle: NavBarStyle.style9,
       animationSettings: const NavBarAnimationSettings(screenTransitionAnimation: ScreenTransitionAnimationSettings(animateTabTransition: true, screenTransitionAnimationType: ScreenTransitionAnimationType.slide)),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pharmacy/domain/data_state.dart';
@@ -6,9 +7,11 @@ import 'package:pharmacy/presentation/pages/page_checkout.dart';
 import 'package:pharmacy/presentation/views/view_error.dart';
 import 'package:pharmacy/presentation/views/row_product.dart';
 import 'package:pharmacy/resources/controller_basket.dart';
+import 'package:pharmacy/resources/controller_order_requests.dart';
 
 class BasketPage extends StatefulWidget {
-  const BasketPage({super.key});
+  final Function(int page) navigateTab;
+  const BasketPage({super.key, required this.navigateTab});
 
   @override
   State<BasketPage> createState() => _BasketPageState();
@@ -16,6 +19,7 @@ class BasketPage extends StatefulWidget {
 
 class _BasketPageState extends State<BasketPage> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
+  final OrderRequestsController _controller1 = Get.find();
 
   @override
   void initState() {
@@ -72,8 +76,18 @@ class _BasketPageState extends State<BasketPage> {
                             child: Row(children: [
                               Expanded(child: Container(margin: const EdgeInsets.only(right: 16), child: Text("basket_text".tr, style: TextStyle(color: Colors.blue.shade700, height: 1.2)))),
                               ElevatedButton(
-                                onPressed: () {
-                                  Get.to(() => const CheckoutPage(), preventDuplicates: true);
+                                onPressed: () async {
+                                  //await Future.delayed(const Duration(seconds: 1)); widget.controllerTab.jumpToTab(2);
+                                  final res = await Get.to(() => const CheckoutPage(), preventDuplicates: true);
+                                  if (res != null && res == true) {
+                                    _controller1.refreshOrderRequests();
+                                    widget.navigateTab(2);
+                                    Fluttertoast.showToast(
+                                        msg: "Sargydyňyz dermanhalara ugradyldy.",
+                                        backgroundColor: Colors.green,
+                                        toastLength: Toast.LENGTH_LONG,
+                                        gravity: ToastGravity.TOP);
+                                  }
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.blue.shade400,

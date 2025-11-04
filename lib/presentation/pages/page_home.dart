@@ -8,7 +8,9 @@ import 'package:pharmacy/presentation/views/card_product.dart';
 import 'package:pharmacy/presentation/views/dialog_language.dart';
 import 'package:pharmacy/presentation/views/view_error.dart';
 import 'package:pharmacy/presentation/views/view_pharmacy.dart';
+import 'package:pharmacy/resources/controller_basket.dart';
 import 'package:pharmacy/resources/controller_home.dart';
+import 'package:pharmacy/resources/controller_order_requests.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,6 +21,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final HomeController controller = Get.find();
+  final BasketController _controller1 = Get.find();
+  final OrderRequestsController _controller2 = Get.find();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
 
   @override
@@ -35,7 +39,9 @@ class _HomePageState extends State<HomePage> {
           onConfirm: (value) async {
             await Get.updateLocale(value);
             await controller.setLanguage(value.languageCode == "ru" ? 1 : 2);
-            controller.refreshHome();
+            await controller.refreshHome();
+            await _controller1.refreshBasket();
+            await _controller2.refreshOrderRequests();
           },
         );
       },
@@ -56,11 +62,26 @@ class _HomePageState extends State<HomePage> {
                 },
                 icon: const Icon(Icons.translate),
               ),
-              IconButton(
-                onPressed: () {
-                  Get.to(() => const ProductsPage(groupCode: ""), preventDuplicates: false);
-                },
-                icon: const Icon(Icons.search),
+              Container(
+                margin: const EdgeInsets.only(right: 12),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.only(left: 10, right: 16),
+                    backgroundColor: Colors.blue.shade400,
+                    disabledBackgroundColor: Colors.blue.shade400,
+                    foregroundColor: Colors.white,
+                    disabledForegroundColor: Colors.white,
+                  ),
+                  onPressed: () {
+                    Get.to(() => const ProductsPage(groupCode: ""), preventDuplicates: false);
+                  },
+                  child: Row(
+                    children: [
+                      const Icon(Icons.search),
+                      Text("search".tr),
+                    ],
+                  ),
+                ),
               )
             ]),
         body: RefreshIndicator(
