@@ -83,7 +83,7 @@ class _BasketPageState extends State<BasketPage> {
                                     _controller1.refreshOrderRequests();
                                     widget.navigateTab(2);
                                     Fluttertoast.showToast(
-                                        msg: "Sargydyňyz dermanhalara ugradyldy.",
+                                        msg: "successfully_sent".tr,
                                         backgroundColor: Colors.green,
                                         toastLength: Toast.LENGTH_LONG,
                                         gravity: ToastGravity.TOP);

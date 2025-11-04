@@ -20,13 +20,14 @@ void main() async {
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  runApp(MyApp(prefs: prefs));
+  runApp(MyApp(prefs: prefs, controllerTab: PersistentTabController(initialIndex: 0)));
 }
 
 class MyApp extends StatelessWidget {
   final SharedPreferences prefs;
+  final PersistentTabController controllerTab;
 
-  const MyApp({super.key, required this.prefs});
+  const MyApp({super.key, required this.prefs, required this.controllerTab});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +57,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        home: MyBottomNav(),
+        home: MyBottomNav(controllerTab: controllerTab),
         initialBinding: BindingsBuilder(() {
           Get.put(RepositoryImpl(prefs, MainApi(prefs: prefs)));
           Get.put(HomeController());
@@ -67,7 +68,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyBottomNav extends StatelessWidget {
-  MyBottomNav({super.key});
+  final PersistentTabController controllerTab;
+  const MyBottomNav({super.key, required this.controllerTab});
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
@@ -110,19 +112,17 @@ class MyBottomNav extends StatelessWidget {
     ];
   }
 
-  final PersistentTabController _controller = PersistentTabController(initialIndex: 0);
-
   @override
   Widget build(BuildContext context) {
     return PersistentTabView(
       onWillPop: (final context) async {
-        if (_controller.index == 0) SystemNavigator.pop();
+        if (controllerTab.index == 0) SystemNavigator.pop();
         return false;
       },
       context,
-      controller: _controller,
+      controller: controllerTab,
       screens: [const HomePage(), BasketPage(navigateTab: (page) {
-        _controller.jumpToTab(2);
+        controllerTab.jumpToTab(2);
       }), const OrderRequestsPage()],
       items: _navBarsItems(),
       navBarStyle: NavBarStyle.style9,

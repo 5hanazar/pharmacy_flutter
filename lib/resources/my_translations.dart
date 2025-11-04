@@ -49,7 +49,8 @@ class MyTranslations extends Translations {
       'no_orders': 'У вас пока нет заказов.',
       'send_order': 'Отправить',
       'basket_text': 'Отправьте ваш заказ во все аптеки города одним нажатием.',
-      'pharmacy_count': 'аптек'
+      'pharmacy_count': 'аптек',
+      'successfully_sent': 'Ваш заказ отправлен в аптеки.',
     },
     'tm_TM': {
       'products': 'Harytlar',
@@ -97,7 +98,8 @@ class MyTranslations extends Translations {
       'no_orders': 'Siz hiç zat sargyt etmediňiz.',
       'send_order': 'Sargyt et',
       'basket_text': 'Sargydyňyzy bir düwme bilen şäheriň ähli dermanhanasyna iberiň.',
-      'pharmacy_count': 'sany'
+      'pharmacy_count': 'sany',
+      'successfully_sent': 'Sargydyňyz dermanhalara ugradyldy.',
     }
   };
 }
