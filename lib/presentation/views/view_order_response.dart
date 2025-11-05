@@ -59,9 +59,7 @@ class OrderResponseView extends StatelessWidget {
           ],
         ),
       ),
-      Align(alignment: Alignment.topRight, child: IconButton(onPressed: () {
-
-      }, icon: Icon(Icons.check, color: Colors.blue.shade400)))
+      Align(alignment: Alignment.topRight, child: IconButton(onPressed: () {}, icon: Icon(Icons.check, color: Colors.blue.shade400)))
     ]));
   }
 }

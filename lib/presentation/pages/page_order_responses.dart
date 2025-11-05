@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy/data/data_source/main_api.dart';
-import 'package:pharmacy/presentation/views/view_order_responses.dart';
+import 'package:pharmacy/presentation/views/view_order_response.dart';
 
 class OrderResponsesPage extends StatefulWidget {
   final OrderRequestDtoView orderRequest;
